@@ -1,0 +1,79 @@
+.quoty {
+	position: relative;
+	margin: 10px auto;
+	width: 100%;
+	min-height: 200px;
+	
+	.item {
+		position: absolute;
+		min-height: 200px;
+		border-bottom: 2px solid #f4f4f4;
+		top: 0;
+		z-index: 0;
+		opacity: 0;
+		width: 100%;
+		text-align: center;
+		
+		&.current{
+			position: relative; 
+			z-index: 100;
+			pointer-events: auto;
+			opacity: 1;
+		}
+		
+		blockquote {
+			padding-left: 0; /* blockquote overwrite*/
+			border: none;
+			padding: 40px 0;
+			
+			p{
+				margin: 0;
+				padding: 0;
+				font-size: 20px;
+				font-style: normal;
+				
+				span{
+					font: italic normal 80px/100% georgia, serif;
+				}
+			}
+			footer{
+				font-weight: bold;
+				padding-top: 5px;
+			}
+		}
+		img{
+			margin: 20px auto;
+			max-width: 50px;
+			max-height: 50px;
+			.border-radius(50px);
+		}
+	}
+	
+	.progress {
+		position: absolute;
+		height: 2px;
+		width: 0%;
+		top: 0;
+		z-index: 1000;
+	}
+}
+
+.no-js .quoty .item {
+	position: relative; 
+	z-index: 100;
+	pointer-events: auto;
+	opacity: 1;
+}
+
+/* Example for media query */
+@media screen and (max-width: 30.6em) { 
+
+	.quoty {
+		font-size: 70%;
+	}
+
+	.quoty img {
+		width: 80px;
+	}
+
+}
