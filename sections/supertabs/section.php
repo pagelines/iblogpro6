@@ -186,7 +186,7 @@ class PLSuperTabs extends PageLinesSection {
 					$icons = pl_icon_array();
 					$icon = $icons[ array_rand($icons) ];
 				}
-				$media_icon = sprintf('<i class="icon-%s media-type-icon"></i>', $icon);
+				$media_icon = sprintf('<i class="icon icon-%s media-type-icon"></i>', $icon);
 
 				$output .= sprintf(
 					'<li class="%s">%s %s</li>',
