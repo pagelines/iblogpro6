@@ -1,0 +1,366 @@
+h1, h2, h3, h4, h5{
+	font-weight: normal;
+}
+
+p{
+	font-size: 20px;
+	line-height: 1.55em;
+}
+.bg-gray{
+	background: #f3f3f3;
+}
+.bg-white{
+	background: #fff;
+}
+
+
+/* iBlog Hero */
+.section-hero{
+	.pl-hero-wrap{
+		.pl-hero{
+			h1{
+				font-weight: normal;
+				font-size: 30px;
+			}
+			p{
+				font-weight: 300;
+				font-size: 14px;
+				line-height: 1.3em;
+			}
+			.btn-primary{
+				font-weight: 400;
+				background: @pl-link;
+				&:hover{
+					opacity: .8;
+				}
+			}
+		}
+	}
+}
+
+/* iBlog highlight */
+.section-highlight{
+	h2.highlight-head{
+		margin-bottom: 15px;
+		font-size: 30px;
+		font-weight: 400;
+	}
+	.highlight-subhead{
+		font-size: 20px;
+		line-height: 1.3em;
+		font-weight: 300;
+	}
+}
+
+/* iBlog iCallout */
+.section-icallout{
+	.format-inline, 
+	.format-top{
+		h2.icallout-head{
+			font-size: 30px;
+			line-height: 50px!important;
+			font-weight: 400;
+		}
+		.icallout-action{
+			background: @pl-link;	
+			font-weight: 400;
+			&:hover{
+				opacity: .8;
+			}	
+		}
+	}
+	
+}
+
+/* iBlog Masthead */
+.section-masthead{
+	h3.masthead-title{
+		font-size: 30px!important;
+		font-weight: 400;
+	}
+}
+
+/* iBlog Textbox */
+.section-textbox{
+	.textbox-wrap{
+		padding: 0;
+		
+		strong{
+			font-weight: 400;
+			font-size: 30px;
+		}
+		p{
+			font-size: 14px;
+			font-weight: 300;
+			margin-top: 10px!important;
+		}
+	}
+}
+
+/* iBlog Starbars/MediaBox */
+.section-starbars, .section-mediabox{
+	h3{
+		font-size: 30px;
+		font-weight: 400;
+		margin: 10px 0 0;
+	}
+	p{
+		font-size: 14px;
+		line-height: 24px;
+		margin: 0;
+	}
+}
+
+/* iBlog Popthumbs */
+.section-popthumbs{
+	h4{
+		font-size: 30px;
+		font-weight: 400;
+	}
+}
+
+/* iBlog Pricing */
+.section-propricing{
+	.propricing-wrap{
+		.pp-plan{
+			.box-shadow(none);
+			.border-radius(0); 
+			border: 1px solid #e3e3e3;
+		}
+		.pp-header{
+			background: #000;
+			font-weight: 300;
+			.pp-title{
+					
+					font-weight: 400;
+					background: none;
+			}
+			.pp-price{	
+				background: none;
+				.price{
+					font-weight: 400;
+				}
+			}		
+		}
+		.pp-attributes{
+			ul{
+				li{
+					&:nth-child( even ) { 
+						background: #f3f3f3;
+					}
+				}
+			}	
+		}
+	}
+}
+
+
+/* iBlog Default Posts */
+.article-wrap{
+	background: #fff;
+	margin-bottom: 50px;
+	.box-shadow(0 0 5px #eaeaea);
+	
+	.author-tag{
+		margin-top: 20px;
+	}
+	
+	.full_img, .post-meta .img{
+		margin: 0;
+		width: 100%;
+	}
+	
+	.post-header{
+		
+		h1, h2{
+			font-size: 30px;
+			font-weight: 400;
+			padding: 30px 30px 0 30px;
+		}
+		.metabar{
+			color: @pl-text;
+			font-size: 10px;
+			padding: 10px 30px 0 30px;
+			a{
+				font-weight: 400;
+				color: @pl-text;
+				&:hover{
+					color: @pl-link;
+				}
+			}
+		}
+		a.continue_reading_link{
+			color: #fff;
+			background: @pl-link;
+			margin-left: 30px;
+			padding: 5px 10px;
+			font-weight: 400;
+			.border-radius(4px);
+			
+			&:hover{
+			background: @pl-link;
+			.transition(all .2s linear);
+			}
+		}
+	}
+	.post-excerpt, .entry_content{
+		font-size: 14px;
+		line-height: 1.65em;
+		padding:0 30px 30px 30px;
+		p{
+			font-size: 14px;
+			line-height: 1.65em;
+		}
+		.note{
+			color: @pl-text;
+			text-transform: none;
+		}
+	}
+}
+/* Theme Post Author */
+.section-postauthor{
+	background: #fff;
+	
+	.author-info{
+		.author-note, h2{
+			font-weight: 400;
+		}
+		h2{
+			font-size: 20px;
+		}
+		p{
+			font-size: 14px;
+		}
+	}
+} 
+
+/* Theme Comments */
+.section-wp-comments{
+	h5{
+		font-weight: 400;
+		font-size: 30px;
+	}	
+	.comment-author{
+	}
+	p{
+		font-size: 14px;
+	}
+	h3.comment-reply-title{
+		font-weight: 400;
+		font-size: 30px;
+	}
+	#submit{
+		color: #fff;
+		padding: 5px 10px;
+		font-weight: 400;
+		border: none;
+		text-shadow: none;
+		.border-radius(4px);
+		.box-shadow(none);
+		
+		&:hover{
+		background: @pl-link;
+		.transition(all .2s linear);
+		}
+	}
+}
+
+/* Theme Primary Sidebar */
+.section-sb_primary{
+	.widget-pad{
+		padding: 0;
+	}
+	h2.widgettitle, h3.widget-title{
+		font-weight: 400;
+	}
+}
+
+/* Theme RapidTabs */
+.section-rapidtabs{
+	.ui-state-active{
+	}
+	h3.widget-title{
+		font-weight: 400;
+		font-size: 20px;
+	}
+}
+
+/* Theme Pagination */
+.section-pagination{
+	a{
+			color: #fff;
+			margin-left: 50px;
+			padding: 5px 10px;
+			font-weight: 400;
+			.border-radius(4px);
+			
+			&:hover{
+			background: @pl-link;
+			.transition(all .2s linear);
+			}
+	}
+}
+
+/* Theme Quickslider */
+.section-quickslider{
+	.tp-bullets	{
+		&.simplebullets.round .bullet{
+			background: #fff;
+			&.selected,
+			&:hover{
+				border: 2px solid @pl-link;
+				background: @pl-link;
+			}
+		}
+	}
+	
+	.tp-bannertimer{
+		background: @pl-link;
+	}
+}
+
+/* Theme Footer */
+.footer{
+	border-top: 1ps solid #e3e3e3;
+}
+
+/*
+ * Responsive
+ ***********************/ 
+
+@media screen and (max-width:500px){
+	
+	/* Responsive Layout */
+		#page .pagelines-content, #page .plx-sidebar, #page .plx-archive-grid{
+			float: none;
+			width: auto;
+		}
+		
+		#page .pagelines-sidebar{
+			float: none;
+			width: auto
+			ul li{
+				margin: 2px 5px;
+				display: inline-block;
+				a{
+					display: inline-block;
+				}
+			}
+		}
+}
+
+@media screen and (max-width:850px) { 
+	body #page .hero-text{
+		clear: both; 
+		padding-top: 10px;
+	}
+
+}
+
+@media screen and (max-width:600px) { 
+	#page {
+		.overview-media, .overview-content{
+			float: none;
+			width: auto;
+		}	}	
+}
