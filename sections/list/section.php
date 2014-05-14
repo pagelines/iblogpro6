@@ -5,9 +5,8 @@
 	Author URI: http://www.pagelines.com
 	Description: An easy to use list section.
 	Class Name: PLList
-	Edition: pro
 	Filter: component
-	Version: 1.3
+	Loading: active
 
 */
 
@@ -159,7 +158,7 @@ class PLList extends PageLinesSection {
 					$icons = pl_icon_array();
 					$icon = $icons[ array_rand($icons) ];
 				}
-				$media_icon = sprintf('<i class="icon-%s media-type-icon"></i>', $icon);
+				$media_icon = sprintf('<i class="icon icon-%s media-type-icon"></i>', $icon);
 				
 				$output .= sprintf(
 					'<li class="pl-animation">%s %s</li>',
