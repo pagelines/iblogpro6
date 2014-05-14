@@ -5,7 +5,7 @@
 	Author URI: http://www.pagelines.com
 	Description: An easy way to create and configure different tab types (Vertical, Horizontal and Accordion).
 	Class Name: PLSuperTabs
-	Filter: component
+	Filter: dual-width
 	Loading: active
 */
 
@@ -35,24 +35,6 @@ class PLSuperTabs extends PageLinesSection {
 					),
 					'default'	=> 'default'
 				),
-				array(
-                    'key' 		=> 'selected_tab_color',
-                    'type' 		=> 'color',
-                    'label' 	=> __('Selected Tab Color', 'pagelines'),
-                    'default' 	=> '000000'
-                ),
-				array(
-                    'key' 		=> 'selected_tab_background_color',
-                    'type' 		=> 'color',
-                    'label'		=> __('Selected Tab Background Color', 'pagelines'),
-                    'default' 	=> 'FFFFFF'
-                ),
-				array(
-                    'key' 		=> 'hover_color',
-                    'type' 		=> 'color',
-                    'label' 	=> __('Hover Color', 'pagelines'),
-                    'default' 	=> 'red'
-                ),
 			)
 
 		);
@@ -64,11 +46,6 @@ class PLSuperTabs extends PageLinesSection {
 			'title'		=> __('Tabs Setup', 'pagelines'), 
 			'post_type'	=> __('Tab', 'pagelines'), 
 			'opts'		=> array(
-				array(
-					'key'		=> 'icon',
-					'label'		=> __( 'Tab Icon', 'pagelines' ),
-					'type'		=> 'select_icon'
-				),
 				array(
 					'key'		=> 'title',
 					'label'		=> __( 'Tab Title', 'pagelines' ),
@@ -104,7 +81,7 @@ class PLSuperTabs extends PageLinesSection {
 			            type: 'default', //default, vertical, accordion;
 		                width: 'auto',
 		                fit: true,
-		                closed: false,
+		                closed: true,
 			        });
 					$('<?php echo $this->prefix(); ?> #vertical').easyResponsiveTabs({
 			            type: 'vertical', 
@@ -121,21 +98,6 @@ class PLSuperTabs extends PageLinesSection {
 				})
 			}(window.jQuery);
 		</script>
-		
-	    <style type="text/css">
-			
-			<?php echo $this->prefix(); ?> .resp-tab-active,
-			<?php echo $this->prefix(); ?> .resp-tab-active:hover,
-			<?php echo $this->prefix(); ?> h2.resp-accordion-active,
-			<?php echo $this->prefix(); ?> h2.resp-accordion-active:hover{
-				color: <?php echo pl_hashify($this->opt('selected_tab_color')); ?>!important;
-				background-color: <?php echo pl_hashify($this->opt('selected_tab_background_color')); ?>;
-			}
-			<?php echo $this->prefix(); ?> li:hover,
-			<?php echo $this->prefix(); ?> .resp-accordion:hover{
-				color: <?php echo pl_hashify($this->opt('hover_color')); ?>;
-			}
-        </style>
 		
 	<?php }
 	
@@ -172,26 +134,16 @@ class PLSuperTabs extends PageLinesSection {
 				$content = pl_array_get( 'content', $item, 'Content for tab '. $count); 
 				$link = pl_array_get( 'link', $item ); 
 				$user_class = pl_array_get( 'class', $item );
-				$icon = pl_array_get( 'icon', $item ); 
 				
 	
 				
 				$title = sprintf('<span data-sync="tabs_array_item%s_title">%s</span>', $count, $title );
 			
 				$content = sprintf('<div data-sync="tabs_array_item%s_content">%s</div>', $count, $content );
-			
-				$media_icon = '';
-
-				if(!$icon || $icon == ''){
-					$icons = pl_icon_array();
-					$icon = $icons[ array_rand($icons) ];
-				}
-				$media_icon = sprintf('<i class="icon icon-%s media-type-icon"></i>', $icon);
 
 				$output .= sprintf(
-					'<li class="%s">%s %s</li>',
+					'<li class="%s">%s</li>',
 					$user_class,
-					$media_icon,
 					$title
 				);
 				$content_out .= sprintf('%s', $content);

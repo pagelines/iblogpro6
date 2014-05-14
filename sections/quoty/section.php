@@ -5,9 +5,7 @@
 	Author URI: http://www.pagelines.com
 	Description: A flexible quote section. Can be customized with several transitions and a large number of quotes.
 	Class Name: PLQuoty
-	Filter: full-width
-	Edition: pro
-	Version: 1.0
+	Filter: dual-width
 */
 
 
@@ -31,36 +29,6 @@ class PLQuoty extends PageLinesSection {
 						'default'	=> '9000',
 						'label' 	=> __( 'Time Per Slide (in Seconds)', 'pagelines' ),
 					),
-					array(
-						'key'		=> 'background_image',
-						'label' 	=> __( 'Background Image', 'pagelines' ),
-						'type'		=> 'image_upload',
-						'default'	=> $this->base_url . '/images/1.jpg',
-					),
-					array(
-	                    'key' 		=> 'background_color',
-	                    'type' 		=> 'color',
-	                    'label' 	=> __('Background Color', 'pagelines'),
-	                    'default' 	=> 'f8f8f8'
-	                ),
-					array(
-	                    'key' 		=> 'text_color',
-	                    'type' 		=> 'color',
-	                    'label' 	=> __('Text Color', 'pagelines'),
-	                    'default' 	=> '000'
-	                ),
-					array(
-	                    'key' 		=> 'link_color',
-	                    'type' 		=> 'color',
-	                    'label'	 	=> __('Link Color', 'pagelines'),
-	                    'default' 	=> '59B1F6'
-	                ),
-					array(
-	                    'key' 		=> 'link_hover_color',
-	                    'type' 		=> 'color',
-	                    'label' 	=> __('Link Hover Color', 'pagelines'),
-	                    'default' 	=> '246CA5'
-	                ),
 				)
 			);
 
@@ -93,12 +61,12 @@ class PLQuoty extends PageLinesSection {
 					'type'		=> 'text'
 				),
 				array(
-					'key'		=> 'location',
-					'label'		=> __( 'Quote Text Location', 'pagelines' ),
+					'key'		=> 'alignment',
+					'label'		=> __( 'Alignment', 'pagelines' ),
 					'type'		=> 'select',
 					'opts'		=> array(
-						'left-side'		=> array('name'=> 'Text On Left'),
-						'right-side'	=> array('name'=> 'Text On Right'),
+						'left-side'		=> array('name'=> 'Align Left'),
+						'right-side'	=> array('name'=> 'Align Right'),
 						'centered'		=> array('name'=> 'Centered'),
 					)
 				)
@@ -120,29 +88,7 @@ class PLQuoty extends PageLinesSection {
 
 	function section_head( ){
 
-		?>
-		
-		<style type="text/css">
-
-			<?php echo $this->prefix(); ?> .quoty{
-				background-color: <?php echo pl_hashify($this->opt('background_color')); ?>;
-				background-image: url("<?php echo $this->opt('background_image'); ?>");
-			}
-			<?php echo $this->prefix(); ?> blockquote{
-				color: <?php echo pl_hashify($this->opt('text_color')); ?>;
-			}
-			<?php echo $this->prefix(); ?> .progress{
-				background: <?php echo pl_hashify($this->opt('link_color')); ?>;
-			}
-			<?php echo $this->prefix(); ?> blockquote a{
-				color: <?php echo pl_hashify($this->opt('link_color')); ?>;
-			}
-			
-			<?php echo $this->prefix(); ?> blockquote a:hover{
-				color: <?php echo pl_hashify($this->opt('link_hover_color')); ?>;
-			}
-			
-        </style>	
+		?>	
 
 		<script>
 			jQuery( function() {
@@ -187,7 +133,7 @@ class PLQuoty extends PageLinesSection {
 					
 					$the_link = pl_array_get( 'link', $quote ); 
 
-					$the_location = pl_array_get( 'location', $quote ); 
+					$the_alignment = pl_array_get( 'alignment', $quote ); 
 
 					$transition = pl_array_get( 'transition', $quote, 'fade' ); 
 					
@@ -199,19 +145,20 @@ class PLQuoty extends PageLinesSection {
 						$quote_class = 'left-side';
 					}
 
-					$quote = sprintf('<p><span>&#147;</span> %s <span>&#148;</span></p>', $the_quote);
+					$quote = sprintf('<p><span>&#147;</span>%s<span>&#148;</span></p>', $the_quote);
 					
 					$image = ($the_image) ? sprintf('<img src="%s" alt="%s" />', $the_image, $the_name) : '';
 					
-					$name = sprintf('<footer> <a href="%s">- %s</a></footer>', $the_link, $the_name);
+					$name = sprintf('<cite><a href="%s">%s</a></cite>', $the_link, $the_name);
 
 
 					$output .= sprintf('
 						<div class="item pl-inner">
 							<blockquote class="%s">
 							  %s %s
-							  %s
+							  
 							</blockquote>
+							%s
 						</div>', 
 						$quote_class,
 						$quote, 
@@ -236,21 +183,21 @@ class PLQuoty extends PageLinesSection {
 					<blockquote>
 					  <img src="<?php echo $this->base_url ?>/images/author.jpg" alt="Steve Jobs" />
 					  <p>You can’t connect the dots looking forward; <br />you can only connect them looking backwards</p>
-					  <footer><a href="http://en.wikipedia.org/wiki/Steve_Jobs">- Steve Jobs</a></footer>
+					  <cite><a href="http://pagelines.com">Steve Jobs</a></cite>
 					</blockquote>
 				</div>
 				<div class="item pl-inner">
 					<blockquote>
-					  <img src="<?php echo $this->base_url ?>/images/pagelines.jpg" alt="PageLines" />
-					  <p>Add an unlimited amount of testimonials to this section here. <br />customize the look of it too!</p>
-					  <footer><a href="http://pagelines.com">- PageLines</a></footer>
+					  <img src="<?php echo $this->base_url ?>/images/author.jpg" alt="Steve Jobs" />
+					  <p>Quality is much better than quantity. <br />One home run is much better than two doubles.</p>
+					  <cite><a href="http://pagelines.com">PageLines</a></cite>
 					</blockquote>
 				</div>
 				<div class="item pl-inner">
 					<blockquote>
-					  <img src="<?php echo $this->base_url ?>/images/pagelines.jpg" alt="PageLines" />
-					  <p>Join the cool kids and get your copy of iBlog Pro now...</p>
-					  <footer><a href="http://pagelines.com">- PageLines</a></footer>
+					  <img src="<?php echo $this->base_url ?>/images/author.jpg" alt="Steve Jobs" />
+					  <p>Everyone here has the sense that right now is one of those moments when we are influencing the future.</p>
+					  <cite><a href="http://pagelines.com">PageLines</a></cite>
 					</blockquote>
 				</div>
 	
