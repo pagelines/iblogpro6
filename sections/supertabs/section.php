@@ -77,33 +77,40 @@ class PLSuperTabs extends PageLinesSection {
 
 		!function ($) {
 				$(document).on('sectionStart', function( e ) {
+
 					$('<?php echo $this->prefix(); ?> #default').easyResponsiveTabs({
 			            type: 'default', //default, vertical, accordion;
 		                width: 'auto',
 		                fit: true,
 		                closed: true,
 			        });
+
 					$('<?php echo $this->prefix(); ?> #vertical').easyResponsiveTabs({
 			            type: 'vertical', 
 		                width: 'auto',
 		                fit: true,
 		                closed: false,
 			        });
+
 					$('<?php echo $this->prefix(); ?> #accordion').easyResponsiveTabs({
 			            type: 'accordion', 
 		                width: 'auto',
 		                fit: true,
 		                closed: false,
 			        });
+
 				})
-			}(window.jQuery);
+			}(window.jQuery); 
+
 		</script>
+		
 		
 	<?php }
 	
+
 	function section_styles(){
 		
-		wp_enqueue_script( 'ResponsiveTabs', $this->base_url.'/easyResponsiveTabs.js', array( 'jquery' ), PL_CORE_VERSION, true );
+		wp_enqueue_script( 'ResponsiveTabs', $this->base_url.'/easyResponsiveTabs.js',  true );
 
 	}
 
