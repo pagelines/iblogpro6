@@ -14,25 +14,6 @@
 class PLList extends PageLinesSection {
 
 	var $default_limit = 4;
-	
-	function section_head(){ ?>
-		
-	    <style type="text/css">
-	
-			<?php echo $this->prefix(); ?> .list-wrap{
-				background-color: <?php echo pl_hashify($this->opt('background_color')); ?>;
-			}
-			<?php echo $this->prefix(); ?> ul.list li{
-				color: <?php echo pl_hashify($this->opt('color')); ?>;
-				font-size: <?php echo $this->opt('font_size'); ?>px;
-			}
-			<?php echo $this->prefix(); ?> ul.list li a{
-				color: <?php echo pl_hashify($this->opt('link_color')); ?>;
-			}
-
-        </style>
-		
-	<?php }
 
 
 	function section_opts(){
@@ -64,24 +45,6 @@ class PLList extends PageLinesSection {
 						'textjustify'	=> array('name' => 'Justify'),
 					)
 				),
-				array(
-                    'key' => 'color',
-                    'type' => 'color',
-                    'label' => __('Color', 'pagelines'),
-                    'default' => '000000'
-                ),
-				array(
-                    'key' => 'link_color',
-                    'type' => 'color',
-                    'label' => __('Link Color', 'pagelines'),
-                    'default' => '59B1F6'
-                ),
-				array(
-                    'key' => 'background_color',
-                    'type' => 'color',
-                    'label' => __('Background Color', 'pagelines'),
-                    'default' => 'ffffff'
-                ),
 			)
 
 		);

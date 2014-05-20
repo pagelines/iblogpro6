@@ -104,7 +104,7 @@ class PLSuperTabs extends PageLinesSection {
 
 		</script>
 		
-		
+
 	<?php }
 	
 
@@ -138,11 +138,12 @@ class PLSuperTabs extends PageLinesSection {
 			foreach( $tabs_array as $item ){
 	
 				$title = pl_array_get( 'title', $item, 'Tab '. $count); 
-				$content = pl_array_get( 'content', $item, 'Content for tab '. $count); 
-				$link = pl_array_get( 'link', $item ); 
-				$user_class = pl_array_get( 'class', $item );
 				
-	
+				$content = pl_array_get( 'content', $item, 'Content for tab '. $count); 
+				
+				$link = pl_array_get( 'link', $item ); 
+				
+				$user_class = pl_array_get( 'class', $item );
 				
 				$title = sprintf('<span data-sync="tabs_array_item%s_title">%s</span>', $count, $title );
 			
@@ -162,6 +163,7 @@ class PLSuperTabs extends PageLinesSection {
 
 		$tabs_type = ($this->opt('tabs_type', $this->oset)) ? $this->opt('tabs_type', $this->oset) : 'default';
 		
+
 		printf('
 			<div class="supertabs row">
 				<div id="%s">
