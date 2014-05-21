@@ -11,11 +11,11 @@
 				barCount += $(this).find('li').length
 			})
 
-			animateStarBar()
+			animateIchart()
 
 		}
 
-		function animateStarBar(){
+		function animateIchart(){
 
 			$('.ichart li:not(".animated")').each(function(i){
 				

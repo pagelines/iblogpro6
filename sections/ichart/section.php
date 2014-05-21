@@ -30,22 +30,30 @@ class PLIChart extends PageLinesSection {
 			'type'	=> 'multi',
 			'opts'	=> array(
 				array(
-					'key'			=> 'starbar_total',
+					'key'			=> 'ichart_title',
 					'type' 			=> 'text',
-					'default'		=> 100,
-					'label' 		=> __( 'iChart Total Count (Number)', 'pagelines' ),
-					'help' 			=> __( 'This number will be used to calculate the percent of the bar filled. The StarBar values will be shown as a percentage of this value. Default is 100.', 'pagelines' ),
+					'default'		=> 'iChart',
+					'label' 	=> __( 'iChart Title (Optional)', 'pagelines' ),
 				),
 
 				array(
-					'key'			=> 'starbar_modifier',
+					'key'			=> 'ichart_total',
+					'type' 			=> 'text',
+					'default'		=> 100,
+					'label' 		=> __( 'iChart Total Count (Number)', 'pagelines' ),
+					'help' 			=> __( 'This number will be used to calculate the percent of the bar filled. The iChart values will be shown as a percentage of this value. Default is 100.', 'pagelines' ),
+				),
+
+				array(
+					'key'			=> 'ichart_modifier',
 					'type' 			=> 'text',
 					'default'		=> '%',
 					'label' 		=> __( 'iChart Modifier (Text Added to Stats)', 'pagelines' ),
 					'help' 			=> __( 'This will be added to the stat number.', 'pagelines' ),
 				),
+				
 				array(
-					'key'			=> 'starbar_format',
+					'key'			=> 'ichart_format',
 					'type' 			=> 'select',
 					'opts'		=> array(
 						'append'		=> array( 'name' => 'Append Modifier (Default)' ),
@@ -53,12 +61,6 @@ class PLIChart extends PageLinesSection {
 					),
 					'default'		=> 'append',
 					'label' 	=> __( 'iChart Format', 'pagelines' ),
-				),
-				array(
-					'key'			=> 'starbar_container_title',
-					'type' 			=> 'text',
-					'default'		=> 'iChart',
-					'label' 	=> __( 'iChart Title (Optional)', 'pagelines' ),
 				),
 			)
 
@@ -91,14 +93,16 @@ class PLIChart extends PageLinesSection {
 	function section_template(  ) {
 
 
-		$starbar_title = $this->opt('starbar_container_title');
-		$starbar_title = ($starbar_title) ? sprintf('<h4>%s</h4>', $starbar_title) : '';
+		$ichart_title = $this->opt('ichart_title');
+		$the_title = ($ichart_title) ? sprintf('<h4>%s</h4>', $ichart_title) : '';
 
-		$starbar_format = $this->opt('starbar_format');
-		$format = ($starbar_format) ? $starbar_format : 'append';
 
-		$starbar_mod = $this->opt('starbar_modifier');
-		$mod = ($starbar_mod) ? $starbar_mod : '%';
+		$ichart_format = $this->opt('ichart_format');
+		$format = ($ichart_format) ? $ichart_format : 'append';
+
+
+		$ichart_mod = $this->opt('ichart_modifier');
+		$mod = ($ichart_mod) ? $ichart_mod : '%';
 
 
 		$bars_array = $this->opt('bars_array');
@@ -106,7 +110,6 @@ class PLIChart extends PageLinesSection {
 		if( !$bars_array || $bars_array == 'false' || !is_array($bars_array) ){
 			$bars_array = array( array(), array(), array() );
 		}
-
 
 		$output = '';
 	
@@ -125,9 +128,9 @@ class PLIChart extends PageLinesSection {
 
 				$value = apply_filters('bar_value', $value, $item, $descriptor); 
 
-				$starbar_total = (int) $this->opt('starbar_total', $item);
+				$ichart_total = (int) $this->opt('ichart_total', $item);
 				
-				$total = ($starbar_total) ? $starbar_total : 100;
+				$total = ($ichart_total) ? $ichart_total : 100;
 
 
 				if(!$value)
@@ -141,7 +144,7 @@ class PLIChart extends PageLinesSection {
 
 				$tag = ( $format == 'append' ) ? $value . $mod : $mod . $value;
 
-				$total_tag = ( $format == 'append' ) ? $starbar_total . $mod : $mod . $starbar_total;
+				$total_tag = ( $format == 'append' ) ? $ichart_total . $mod : $mod . $ichart_total;
 
 				$output .= sprintf(
 					'<li><div class="bar-wrap pl-contrast"><span class="the-bar" data-width="%s"><strong>%s</strong></span></div>%s</li>',
@@ -158,7 +161,7 @@ class PLIChart extends PageLinesSection {
 		if($output == ''){
 			$this->default_chart();
 		} else
-			printf('<div class="ichart-wrap">%s<ul class="ichart">%s</ul></div>', $starbar_title, $output);
+			printf('<div class="ichart-wrap">%s<ul class="ichart">%s</ul></div>', $the_title, $output);
 
 	}
 
