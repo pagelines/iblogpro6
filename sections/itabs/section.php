@@ -1,16 +1,18 @@
 <?php
 /*
-	Section: SuperTabs
+
+	Section: iTabs
 	Author: PageLines
 	Author URI: http://www.pagelines.com
 	Description: An easy way to create and configure different tab types (Vertical, Horizontal and Accordion).
-	Class Name: PLSuperTabs
-	Filter: dual-width
-	Loading: active
+	Class Name: PLITabs
+	Filter: dual-width, tabs
 */
 
 
-class PLSuperTabs extends PageLinesSection {
+
+
+class PLITabs extends PageLinesSection {
 
 	var $default_limit = 3;
 
@@ -20,7 +22,7 @@ class PLSuperTabs extends PageLinesSection {
 
 		$options[] = array(
 
-			'title' => __( 'SuperTabs Configuration', 'pagelines' ),
+			'title' => __( 'iTabs Configuration', 'pagelines' ),
 			'key'	=> 'tabs_config',
 			'type'	=> 'multi',
 			'opts'	=> array(
@@ -133,7 +135,7 @@ class PLSuperTabs extends PageLinesSection {
 		
 		if( is_array($tabs_array) ){
 			
-			$boxes = count( $tabs_array );
+			$tabs = count( $tabs_array );
 			
 			foreach( $tabs_array as $item ){
 	
@@ -165,7 +167,7 @@ class PLSuperTabs extends PageLinesSection {
 		
 
 		printf('
-			<div class="supertabs row">
+			<div class="itabs row">
 				<div id="%s">
 					<ul class="resp-tabs-list">
 		                %s
