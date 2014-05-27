@@ -1,27 +1,35 @@
 .section-ifooter{
 	.ifooter-container{
-		border-top: 1px solid #e3e3e3;
+		border-top: 1px solid @grayLighter;
 		padding-top: 10px;
-		font-size: .86em;
+		font-size: 11px;
 	}
 	.copyright-text{
 		opacity: .5;
 	}
 	.tagline-text p,
-	.copyright-text p{
-		font-size: 12px;
+	.copyright-text p,
+	.ifooter_nav p{
+		font-size: 11px;
 		margin: 0;
 	}
-	.logo img{
-		max-height: 40px;
-	}	
 	
-	.media-list{
+	.ifooter_nav{
 		margin-bottom: 1em;
+		float: right;
+		
 		 li{
-			> a{
-				color: @pl-text;
+		 	float: left;
+			border-right: 1px solid @grayLighter;
+
+			&:last-child{
+				border: none;
+			}
+			
+		 	> a{
+				color: @pl-link;
 				opacity: .7;
+				padding: 0 5px;
 				&:hover{
 					opacity: 1;
 				}
