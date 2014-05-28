@@ -153,7 +153,7 @@ class PLISlider extends PageLinesSection
         $posts = get_posts($the_query);
         
 ?>
-
+            <h3>iTunes This Week</h3>
 			<div class="flex-slider islider-container">
 					<ul class="slides fadein">
 		<?php
