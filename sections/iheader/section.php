@@ -11,7 +11,6 @@
 
 class PLIHeader extends PageLinesSection {
 
-
 	function section_persistent(){
 		register_nav_menus( array( 'iheader_nav' => __( 'iHeader Section', 'pagelines' ) ) );
 
@@ -20,12 +19,12 @@ class PLIHeader extends PageLinesSection {
 	function section_opts(){
 
 
-		$the_urls = array(); 
+		$social_urls = array(); 
 	
-		$icons = $this->the_icons();
+		$social_icons = $this->social_icons();
 		
-		foreach($icons as $icon){
-			$the_urls[] = array(
+		foreach($social_icons as $icon){
+			$social_urls[] = array(
 				'label'	=> ui_key($icon) . ' URL', 
 				'key'	=> 'iheader_'.$icon,
 				'type'	=> 'text',
@@ -37,14 +36,14 @@ class PLIHeader extends PageLinesSection {
 		$opts = array(
 			array(
 				'type'	=> 'multi',
-				'key'	=> 'navi_content',
+				'key'	=> 'iheader_content',
 				'title'	=> __( 'Logo', 'pagelines' ),
 				'col'	=> 1,
 				'opts'	=> array(
 					array(
 						'type'	=> 'image_upload',
-						'key'	=> 'navi_logo',
-						'label'	=> __( 'Navboard Logo', 'pagelines' ),
+						'key'	=> 'iheader_logo',
+						'label'	=> __( 'iHeader Logo', 'pagelines' ),
 						'has_alt'	=> true,
 						'opts'	=> array(
 							'center_logo'	=> 'Center: Logo | Right: Pop Menu | Left: Site Search',
@@ -53,8 +52,8 @@ class PLIHeader extends PageLinesSection {
 					),
 					array(
 						'type'		=> 'check',
-						'key'		=> 'navi_logo_disable',
-						'label'		=> __( 'Disable Logo?', 'pagelines' ),
+						'key'		=> 'iheader_logo_disable',
+						'label'		=> __( 'Hide Logo?', 'pagelines' ),
 						'default'	=> false
 					)
 				)
@@ -63,18 +62,21 @@ class PLIHeader extends PageLinesSection {
 
 			array(
 				'type'	=> 'multi',
-				'key'	=> 'navi_content',
+				'key'	=> 'iheader_social',
 				'title'	=> __( 'Social Icons', 'pagelines' ),
 				'col'	=> 1,
 				'opts'	=> array(
 					array(
 						'type'	=> 'multi',
-						'key'	=> 'iheader_urls', 
+						'key'	=> 'iheader_social_urls', 
 						'title'	=> 'Link URLs',
-						
-						'col'	=> 2,
-						'opts'	=> $the_urls
-						
+						'opts'	=> $social_urls,
+					),
+					array(
+						'type'		=> 'check',
+						'key'		=> 'iheader_social_disable',
+						'label'		=> __( 'Hide Social Icons?', 'pagelines' ),
+						'default'	=> false
 					),
 				)
 
@@ -83,7 +85,7 @@ class PLIHeader extends PageLinesSection {
 
 			array(
 				'type'	=> 'multi',
-				'key'	=> 'navi_nav',
+				'key'	=> 'iheader_nav',
 				'title'	=> 'Navigation',
 				'col'	=> 2,
 				'opts'	=> array(
@@ -94,22 +96,15 @@ class PLIHeader extends PageLinesSection {
 						'help'	=> __( 'Want a full width, multi column "mega menu"? Simply add a class of "megamenu" to the list items using the WP menu creation tool.', 'pagelines' )
 					),
 					array(
-						'key'	=> 'navi_menu',
+						'key'	=> 'iheader_menu',
 						'type'	=> 'select_menu',
 						'label'	=> __( 'Select Menu', 'pagelines' ),
 					),
 					array(
-						'key'	=> 'navi_search',
+						'key'	=> 'iheader_search',
 						'type'	=> 'check',
 						'label'	=> __( 'Hide Search?', 'pagelines' ),
-					),
-					array(
-						'key'	=> 'navi_offset',
-						'type'	=> 'text_small',
-						'place'	=> '100%',
-						'label'	=> __( 'Dropdown offset from top of nav (optional)', 'pagelines' ),
-						'help'	=> __( 'Default is 100% aligned to bottom. Can be PX or %.', 'pagelines' )
-					)	
+					),	
 				)
 			)
 		);
@@ -118,10 +113,9 @@ class PLIHeader extends PageLinesSection {
 
 	}
 
-
-	function the_icons( ){
+	function social_icons( ){
 		
-		$icons = array(
+		$social_icons = array(
 			'facebook',
 			'linkedin',
 			'instagram',
@@ -134,83 +128,93 @@ class PLIHeader extends PageLinesSection {
 			'github',
 		); 
 		
-		
-		return $icons;
+		return $social_icons;
 		
 	}
 
 	
    function section_template( $location = false ) {
 
-   		$icons = $this->the_icons(); 
+   		//echo $this->image( 'iheader_logo', pl_get_theme_logo(), array(), get_bloginfo('name'));
+   		$logo = $this->image( 'iheader_logo', pl_get_theme_logo(), array(), get_bloginfo('name'));
 
-		$menu = ( $this->opt('navi_menu') ) ? $this->opt('navi_menu') : false;
-		$offset = ( $this->opt('navi_offset') ) ? sprintf( 'data-offset="%s"', $this->opt('navi_offset') ) : false;
-		$hide_search = ( $this->opt('navi_search') ) ? true : false;
-		$class = ( $this->meta['draw'] == 'area' ) ? 'pl-content' : '';
+   		$hide_logo = ( $this->opt('iheader_logo_disable') ) ? $this->opt('iheader_logo_disable') : false;
+
+   		$social_icons = $this->social_icons(); 
+
+   		$hide_social = ( $this->opt('iheader_social_disable') ) ? $this->opt('iheader_social_disable') : false;
+
+		$menu = ( $this->opt('iheader_menu') ) ? $this->opt('iheader_menu') : false;
+
+		$hide_search = ( $this->opt('iheader_search') ) ? true : false;
+
+		$menu_args = array(
+			'theme_location' => 'iheader_nav',
+			'menu' => $menu,
+			'menu_class'	=> 'inline-list pl-nav sf-menu',
+			
+		);
 
 	?>
 
-	<div class="fix row">
+	<div class="row">
 
-		<div class="span4">
-			<?php if( '1' !== $this->opt( 'navi_logo_disable' ) ): ?>
-				<a href="<?php echo home_url('/');?>"><?php echo $this->image( 'navi_logo', pl_get_theme_logo(), array(), get_bloginfo('name')); ?></a>
+		<div class="span4 logo">
+
+			<?php if( '1' !== $hide_logo ): ?>
+
+				<a href="<?php echo home_url('/');?>"><?php echo $logo; ?></a>
+			
 			<?php endif; ?>
+
 		</div>
 
-		<div class="span6 offset2">
+		<div class="span6 offset2 icons">
+
+			<?php if( '1' !== $hide_social ): ?>
 			
-			<div class="icons">
-			<?php 
-			
-			foreach($icons as $icon){
-			
-				$url = ( pl_setting('iheader_'.$icon) ) ? pl_setting('iheader_'.$icon) : false;
-			
-				if( $url )
-					printf('<a href="%s" class="iheader-link" target="_blank"><i class="icon icon-%s"></i></a>', $url, $icon); 
-			}
-		
-			?>
-			</div>
+				<div class="icons">
+
+					<?php 
+					
+					foreach($social_icons as $icon){
+					
+						$url = ( pl_setting('iheader_'.$icon) ) ? pl_setting('iheader_'.$icon) : false;
+					
+						if( $url )
+							printf('<a href="%s" class="iheader-link" target="_blank"><i class="icon icon-%s"></i></a>', $url, $icon); 
+					}
+				
+					?>
+
+				</div>
+
+			<?php endif; ?>
 
 		</div>
 	</div>
 
-	<div class="navi-wrap <?php echo $class; ?> fix">
-		
+	<div class="nav-wrap fix">
 
-			<ul class="homebutton navi-left">
+			<ul class="homebutton">
 				<li>
 					<a href="<?php echo home_url(); ?>" title="<?php bloginfo("name"); ?>">
+						
 						<i class="icon icon-home"></i>
-						<!-- <img src="http://demo.marcofolio.net/apple_menu/images/logo.png" /> -->
+					
 					</a>
 				</li>
 			</ul>
 
 			<?php
 
-				$menu_args = array(
-					'theme_location' => 'navi_nav',
-					'menu' => $menu,
-					'menu_class'	=> 'inline-list pl-nav sf-menu navi-left',
-					'attr'			=> $offset,
-				);
 				echo pl_navigation( $menu_args );
 
 				if( ! $hide_search )
-					pagelines_search_form( true, 'navi-searchform');
+					pagelines_search_form( true, 'iheader-searchform');
 			?>
-
-
-
-
 
 	</div>
 <?php }
 
 }
-
-

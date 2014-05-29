@@ -12,12 +12,10 @@
 				smoothHeight: true,
 				controlNav: false,
 				touch: true,
-				prevText: '<i class="icon icon-chevron-left"></i>',
-				nextText: '<i class="icon icon-chevron-right"></i>',
+				prevText: 'Previous',
+				nextText: 'Next',
 
 	    });
-
-
-		
+	    
 	})
 }(window.jQuery);

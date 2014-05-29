@@ -43,19 +43,6 @@ class PLISlider extends PageLinesSection
                     'help' => __('<strong>Note</strong><br/> Post types for this section must have "featured images" enabled and be public.<br/><strong>Tip</strong><br/> Use a plugin to create custom post types for use with iSlider.', 'pagelines')
                 ),
                 array(
-                    'key' => $this->id . '_format',
-                    'type' => 'select',
-                    'label' => __('Layout Format', 'pagelines'),
-                    'opts' => array(
-                        'image' => array(
-                            'name' => __('Image Only', 'pagelines')
-                        ),
-                        'image_content' => array(
-                            'name' => __('Image and Content', 'pagelines')
-                        )
-                    )
-                ),
-                array(
                     'key' => 'islider_sizes',
                     'type' => 'select_imagesizes',
                     'label' => __('Select Thumb Size', 'pagelines')
@@ -67,30 +54,6 @@ class PLISlider extends PageLinesSection
                     'count_number' => 20,
                     'default' => 5,
                     'label' => __('Total Posts Loaded', 'pagelines')
-                )
-                
-            )
-            
-        );
-
-        $options[] = array(
-
-            'title' => __( 'iSlider Content', 'pagelines' ),
-            'col'   => 2,
-            'type'  => 'multi',
-            'help'      => __( 'Options to control the text and link in the iSlider title.', 'pagelines' ),
-            'opts'  => array(
-                array(
-                    'key'           => 'islider_meta',
-                    'type'          => 'text',
-                    'label'         => __( 'iSlider Meta', 'pagelines' ),
-                    'ref'           => __( 'Use shortcodes to control the dynamic meta info. Example shortcodes you can use are: <ul><li><strong>[post_categories]</strong> - List of categories</li><li><strong>[post_edit]</strong> - Link for admins to edit the post</li><li><strong>[post_tags]</strong> - List of post tags</li><li><strong>[post_comments]</strong> - Link to post comments</li><li><strong>[post_author_posts_link]</strong> - Author and link to archive</li><li><strong>[post_author_link]</strong> - Link to author URL</li><li><strong>[post_author]</strong> - Post author with no link</li><li><strong>[post_time]</strong> - Time of post</li><li><strong>[post_date]</strong> - Date of post</li><li><strong>[post_type]</strong> - Type of post</li></ul>', 'pagelines' ),
-                ),
-                array(
-                    'key'           => 'islider_show_excerpt',
-                    'type'          => 'check',
-                    'label'     => __( 'Show excerpt?', 'pagelines' ),
-
                 ),
                 array(
                     'key' => 'islider_post_sort',
@@ -109,6 +72,41 @@ class PLISlider extends PageLinesSection
                         )
                     )
                 )
+                
+            )
+            
+        );
+
+        $options[] = array(
+
+            'title' => __( 'iSlider Header', 'pagelines' ),
+            'col'   => 2,
+            'type'  => 'multi',
+            'opts'  => array(
+                array(
+                    'key'           => 'islider_title',
+                    'type'          => 'text',
+                    'label'     => __( 'Title', 'pagelines' ),
+
+                ),
+                array(
+                    'key'           => 'islider_link',
+                    'type'          => 'text',
+                    'label'     => __( 'Link Text', 'pagelines' ),
+
+                ),
+                array(
+                    'key'           => 'islider_link_url',
+                    'type'          => 'text',
+                    'label'     => __( 'Link URL', 'pagelines' ),
+
+                ),
+                array(
+                    'key'           => 'hide_header',
+                    'type'          => 'check',
+                    'label'     => __( 'Hide Header?', 'pagelines' ),
+
+                ),
               
             )
 
@@ -121,7 +119,12 @@ class PLISlider extends PageLinesSection
     
     function section_template()
     {
-        
+        $title = ($this->opt('islider_title', $this->oset)) ? $this->opt('islider_title', $this->oset) : 'iSlider Section';
+
+        $link_text = ($this->opt('islider_link', $this->oset)) ? $this->opt('islider_link', $this->oset) : 'See All iBlogPro Sections';
+
+        $link_url = ($this->opt('islider_link_url', $this->oset)) ? $this->opt('islider_link_url', $this->oset) : ' ';
+
         global $post;
         
         $post_type = ($this->opt('islider_post_type')) ? $this->opt('islider_post_type') : 'post';
@@ -135,12 +138,8 @@ class PLISlider extends PageLinesSection
         $sorting = ($this->opt('islider_post_sort')) ? $this->opt('islider_post_sort') : 'DESC';
 
         $orderby = ( 'rand' == $this->opt('islider_post_sort') ) ? 'rand' : 'date'; 
-        
-        $format = ($this->opt($this->id . '_format')) ? $this->opt($this->id . '_format') : 'image';
-        
-        $meta = ($this->opt('islider_meta')) ? $this->opt('islider_meta') : '[post_edit]';
 
-        $show_excerpt = ($this->opt('islider_show_excerpt')) ? $this->opt('islider_show_excerpt') : false;
+        $hide_header = ($this->opt('hide_header')) ? $this->opt('hide_header') : false;
         
         $the_query = array(
             'posts_per_page'=> $total,
@@ -152,8 +151,18 @@ class PLISlider extends PageLinesSection
         
         $posts = get_posts($the_query);
         
-?>
-            <h3>iTunes This Week</h3>
+?>  
+        <?php if( !$hide_header ): 
+
+        printf('
+            <div class="center islider-title">
+                <h3>%s</h3>
+                <a href="%s">%s <i class="icon icon-chevron-right"></i></a>
+            </div>', $title, $link_url, $link_text);
+
+        endif;?>
+        
+
 			<div class="flex-slider islider-container">
 					<ul class="slides fadein">
 		<?php
@@ -162,7 +171,7 @@ class PLISlider extends PageLinesSection
 		?>
 
 
-		<li>
+		<li class="fix">
             
 		<?php
 
@@ -177,25 +186,6 @@ class PLISlider extends PageLinesSection
             }
 
 		?>
-
-		<?php if ($format == 'image_content'): ?>
-
-			<div>
-					
-					<h4><a href="<?php echo get_permalink();?>"><?php the_title(); ?></a></h4>
-					<div><?php echo do_shortcode( apply_filters('islider_meta', $meta, $post->ID, pl_type_slug() )); ?></div>
-					
-					<?php if( $show_excerpt ): ?>
-                    <div class="islider-excerpt">
-                        <?php the_excerpt();?>
-                    </div>
-                    <?php endif;?>
-					
-			</div>
-
-		<?php  endif; ?>
-
-		<div class="clear"></div>
 
 		</li>
 
