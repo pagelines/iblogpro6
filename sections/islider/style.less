@@ -1,18 +1,42 @@
 .section-islider{
-	
+
+
 	overflow-x: hidden;
 	
-	.islider-title{
-		padding-top: 20px;
+	.islider-header{
+		display: inline-block;
+		position: absolute;
+		z-index: 10;
+		height: 50%;
+		padding: 0 80px;
+		overflow: auto;
+		margin: auto;
+		top: 0; left: 0; bottom: 0; right: 0;
+		text-align: center;
+		color: @white;
+
+		a{
+			color: @white;
+
+			i{
+				height: 14px;
+				width: 14px;
+				margin-left: 5px;
+				padding: 4px;
+				border-radius: 50px;
+				border: 2px solid #fff;
+			}
+		}
+		
+
 	}
 
 	.flex-slider { 
-
+ 		
 		position: relative;
 		max-width: 86%; 
 		margin: 0 auto; 
-		padding: 30px 0 5px 0; 
-
+		padding: 20px 0 0 0; 
 		
 		.no-js .slides > li:first-child { 
 			display: block; 
@@ -25,24 +49,24 @@
 
 				a{
 					position: absolute;
-					top: 50%;
 					display: inline-block;
-				   	height: 131px;
+					top: 0; 
+				   	height: 100%;
 			   		width: 68px;
-			   		margin: -65px 0 0;
-					background-size: 68px 131px;
 					font-size: 0;
 					opacity: .3;
 					.transition(opacity 0.1s ease-in-out);
 
 				   	&.islider-prev{
 				   		left: -85px;
-				   		background-image: url(@{plChildRoot}/sections/islider/prev_2x.png);
+				   		background: url(@{plChildRoot}/sections/islider/prev_2x.png) no-repeat center center;
+				   		background-size: 68px 131px;
 				   	}
 
 				   	&.islider-next{
 				   		right: -85px;
-				   		background-image: url(@{plChildRoot}/sections/islider/next_2x.png);
+				   		background: url(@{plChildRoot}/sections/islider/next_2x.png) no-repeat center center;
+				   		background-size: 68px 131px;
 				   	}
 				   	
 				   	&:hover{
@@ -56,7 +80,7 @@
 
 		.islider-viewport { 
 			
-			overflow: visible!important; 
+			//overflow: visible!important; 
 
 
 			.slides { 
@@ -69,7 +93,7 @@
 				li { 
 					display: none;  
 					position: relative; 
-					pointer-events: none; 
+					
 
 					img {
 						display: block; 
@@ -101,6 +125,36 @@
 
 			}
 	
+		}
+
+		.islider-control-nav{
+				text-align: center;
+			li{
+				display: inline-block;
+				margin: 0 5px;
+width: 12px;
+height: 12px;
+			}
+			a{
+				cursor: pointer;
+				width: 6px; 
+				height: 6px; 
+				margin: 2px 0 0 2px;
+				float: left;
+				font-size: 0;
+				background: #999;
+				border: 1px solid transparent; 
+				.border-radius(25px);
+
+
+				&.islider-active{
+					margin: 0;
+					width: 10px; 
+					height: 10px; 
+					background: transparent; 
+					border: 1px solid #999;
+				}
+			}
 		}
 	
 

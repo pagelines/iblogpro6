@@ -5,15 +5,13 @@
 			
 				namespace: "islider-",
 				animation: "slide",
-				slideshow: false,
-				animationLoop: false,
 				startAt: 1,
+				slideshow: true,
+				animationLoop: false,
 				directionNav: true,
 				smoothHeight: true,
-				controlNav: false,
+				controlNav: true,
 				touch: true,
-				prevText: 'Previous',
-				nextText: 'Next',
 
 	    });
 	    

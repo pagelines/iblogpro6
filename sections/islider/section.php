@@ -5,7 +5,7 @@ Author: PageLines
 Author URI: http://www.pagelines.com
 Description: A professional and versatile slider section. 
 Class Name: PLISlider
-Filter: dual-width, slider
+Filter: slider, full-width
 */
 
 
@@ -34,168 +34,131 @@ class PLISlider extends PageLinesSection
             'type' => 'multi',
             'col' => 1,
             'opts' => array(
-                array(
-                    'key' => 'islider_post_type',
-                    'type' => 'select',
-                    'opts' => pl_get_thumb_post_types(),
-                    'default' => 4,
-                    'label' => __('Which post type should iSlider use?', 'pagelines'),
-                    'help' => __('<strong>Note</strong><br/> Post types for this section must have "featured images" enabled and be public.<br/><strong>Tip</strong><br/> Use a plugin to create custom post types for use with iSlider.', 'pagelines')
-                ),
-                array(
-                    'key' => 'islider_sizes',
-                    'type' => 'select_imagesizes',
-                    'label' => __('Select Thumb Size', 'pagelines')
-                ),
-                array(
-                    'key' => 'islider_total',
-                    'type' => 'count_select',
-                    'count_start' => 3,
-                    'count_number' => 20,
-                    'default' => 5,
-                    'label' => __('Total Posts Loaded', 'pagelines')
-                ),
-                array(
-                    'key' => 'islider_post_sort',
-                    'type' => 'select',
-                    'label' => __('Sort elements by postdate', 'pagelines'),
-                    'default' => 'DESC',
-                    'opts' => array(
-                        'DESC' => array(
-                            'name' => __('Date Descending (default)', 'pagelines')
-                        ),
-                        'ASC' => array(
-                            'name' => __('Date Ascending', 'pagelines')
-                        ),
-                        'rand' => array(
-                            'name' => __('Random', 'pagelines')
-                        )
-                    )
-                )
+                
                 
             )
             
         );
 
         $options[] = array(
-
-            'title' => __( 'iSlider Header', 'pagelines' ),
-            'col'   => 2,
-            'type'  => 'multi',
+            'key'       => 'islider_array',
+            'type'      => 'accordion', 
+            'col'       => 2,
+            'title'     => __('iSlider Setup', 'pagelines'), 
+            'post_type' => __('iSlide', 'pagelines'), 
             'opts'  => array(
                 array(
-                    'key'           => 'islider_title',
-                    'type'          => 'text',
+                    'key'       => 'image',
+                    'label'     => __( 'Slide  Image <span class="badge badge-mini badge-warning">REQUIRED</span>', 'pagelines' ),
+                    'type'      => 'image_upload',
+                    'sizelimit' => 2097152, // 2M
+                    'help'      => __( 'For high resolution, 2000px wide x 800px tall images. (2MB Limit)', 'pagelines' )
+                    
+                ),
+                array(
+                    'key'       => 'title',
                     'label'     => __( 'Title', 'pagelines' ),
-
+                    'type'      => 'text'
                 ),
                 array(
-                    'key'           => 'islider_link',
-                    'type'          => 'text',
+                    'key'       => 'text',
+                    'label'     => __( 'Text', 'pagelines' ),
+                    'type'      => 'text'
+                ),
+                array(
+                    'key'       => 'link',
+                    'label'     => __( 'Link (Optional)', 'pagelines' ),
+                    'type'      => 'text'
+                ),
+                array(
+                    'key'       => 'link_text',
                     'label'     => __( 'Link Text', 'pagelines' ),
-
+                    'type'      => 'text'
                 ),
-                array(
-                    'key'           => 'islider_link_url',
-                    'type'          => 'text',
-                    'label'     => __( 'Link URL', 'pagelines' ),
-
-                ),
-                array(
-                    'key'           => 'hide_header',
-                    'type'          => 'check',
-                    'label'     => __( 'Hide Header?', 'pagelines' ),
-
-                ),
-              
             )
-
         );
         
         
         return $options;
     }
     
-    
-    function section_template()
-    {
-        $title = ($this->opt('islider_title', $this->oset)) ? $this->opt('islider_title', $this->oset) : 'iSlider Section';
 
-        $link_text = ($this->opt('islider_link', $this->oset)) ? $this->opt('islider_link', $this->oset) : 'See All iBlogPro Sections';
-
-        $link_url = ($this->opt('islider_link_url', $this->oset)) ? $this->opt('islider_link_url', $this->oset) : ' ';
-
-        global $post;
+    function section_template( ) {
         
-        $post_type = ($this->opt('islider_post_type')) ? $this->opt('islider_post_type') : 'post';
+        $islider_array = $this->opt('islider_array');
         
-        $pt = get_post_type_object($post_type);
-
-        $total = ($this->opt('islider_total')) ? $this->opt('islider_total') : '5';
+        if( !$islider_array || $islider_array == 'false' || !is_array($islider_array) ){
+            $islider_array = array( array(), array(), array() );
+        }
         
-        $sizes = ($this->opt('islider_sizes')) ? $this->opt('islider_sizes') : 'aspect-thumb';
-
-        $sorting = ($this->opt('islider_post_sort')) ? $this->opt('islider_post_sort') : 'DESC';
-
-        $orderby = ( 'rand' == $this->opt('islider_post_sort') ) ? 'rand' : 'date'; 
-
-        $hide_header = ($this->opt('hide_header')) ? $this->opt('hide_header') : false;
+        $align = ($this->opt('list_align', $this->oset)) ? $this->opt('list_align', $this->oset) : 'textleft';
         
-        $the_query = array(
-            'posts_per_page'=> $total,
-            'post_type'     => $post_type,
-            'orderby'       => $orderby,
-            'order'         => $sorting,
-        );
+        $count = 1; 
         
+        $output = '';
         
-        $posts = get_posts($the_query);
-        
-?>  
-        <?php if( !$hide_header ): 
-
-        printf('
-            <div class="center islider-title">
-                <h3>%s</h3>
-                <a href="%s">%s <i class="icon icon-chevron-right"></i></a>
-            </div>', $title, $link_url, $link_text);
-
-        endif;?>
-        
-
-			<div class="flex-slider islider-container">
-					<ul class="slides fadein">
-		<?php
-		        
-		        if (!empty($posts)): foreach ($posts as $post): setup_postdata($post);
-		?>
-
-
-		<li class="fix">
+        if( is_array($islider_array) ){
             
-		<?php
+            $slides = count( $islider_array );
+            
 
-            if (has_post_thumbnail()) { 
+            foreach( $islider_array as $slide ){
 
-                printf('<a href="%s">%s</a>', get_permalink(), get_the_post_thumbnail($post->ID, $sizes, array('title' => '')));
+                $title = pl_array_get( 'title', $slide); 
 
-            } else {
+                $text = pl_array_get( 'text', $slide); 
 
-                printf('<img height="400" width="600" src="%s" alt="no image added yet." />', pl_default_image());
-           
+                $link = pl_array_get( 'link', $slide );
+
+                $link_text = pl_array_get( 'link_text', $slide );  
+
+                $the_img = pl_array_get( 'image', $slide );
+
+                $the_img = ( $the_img ) ? $the_img : $this->base_url.'/space.jpg';
+
+                $img = sprintf('<img src="%s" alt="">', $the_img);           
+                
+
+                //$header = sprintf(' ', $count, $title, $text, $link_text);
+
+                $title = sprintf('<h2 data-sync="islider_array_slide%s_title">%s</h2>', $count, $title);
+
+                $text = sprintf('<h3 data-sync="islider_array_slide%s_text">%s</h3>', $count, $text);
+
+                if( $link ){
+                    $link_text = sprintf('<a data-sync="islider_array_slide%s_link_text" href="%s">%s <i class="icon icon-chevron-right"></i></a>', $count, $link, $link_text);
+                } else { 
+                    $link_text = '';
+                };
+
+                
+
+
+                $output .= sprintf(
+                    '<li>
+                        <div class="islider-header"> %s %s %s </div>
+                        %s
+                    </li>',
+                    $title,
+                    $text,
+                    $link_text,
+                    $img
+                );
+                
+                
+                $count++;
             }
 
-		?>
+        }
 
-		</li>
-
-		<?php endforeach; endif;
-		      
-		      if (!empty($posts))
-		            echo '</ul></div>';
-		?>
-
-
+        printf('
+            <div class="flex-slider islider-container">
+                <ul class="slides">
+                    %s
+                </ul>
+            </div>', $output);
+    
+     ?>
 
 	<?php
 	}
