@@ -4,12 +4,12 @@
 	Author: PageLines
 	Author URI: http://www.pagelines.com
 	Description: A stylized navigation bar with multiple modes and styles.
-	Class Name: PLIHeader
+	Class Name: iHeader
 	Filter: nav
 */
 
 
-class PLIHeader extends PageLinesSection {
+class iHeader extends PageLinesSection {
 
 	function section_persistent(){
 		register_nav_menus( array( 'iheader_nav' => __( 'iHeader Section', 'pagelines' ) ) );
@@ -135,7 +135,6 @@ class PLIHeader extends PageLinesSection {
 	
    function section_template( $location = false ) {
 
-   		//echo $this->image( 'iheader_logo', pl_get_theme_logo(), array(), get_bloginfo('name'));
    		$logo = $this->image( 'iheader_logo', pl_get_theme_logo(), array(), get_bloginfo('name'));
 
    		$hide_logo = ( $this->opt('iheader_logo_disable') ) ? $this->opt('iheader_logo_disable') : false;

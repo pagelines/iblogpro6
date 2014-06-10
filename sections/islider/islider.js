@@ -5,15 +5,16 @@
 			
 				namespace: "islider-",
 				animation: "slide",
-				startAt: 1,
-				slideshow: true,
+				//startAt: 0,
+				//slideshow: false,
+				fadeFirstSlide: true, 
 				animationLoop: false,
 				directionNav: true,
 				smoothHeight: true,
-				controlNav: true,
+				//controlNav: true,
 				touch: true,
 
 	    });
-	    
+
 	})
 }(window.jQuery);

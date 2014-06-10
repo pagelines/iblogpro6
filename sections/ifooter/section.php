@@ -3,7 +3,7 @@
 	Section: iFooter
 	Author: PageLines
 	Author URI: http://www.pagelines.com
-	Description: iBlogPro stylized footer area. Columnized with navigation.
+	Description: iBlogPro stylized footer area with enhanced breadcrumb Navigation.
 	Class Name: iFooter
 	
 */
@@ -14,43 +14,84 @@ class iFooter extends PageLinesSection {
 	
 	function section_opts(){
 
+		$menu_options = array(); 
+		
+		for( $i = 1; $i <= 4; $i++ ){
+			
+			$menu_options[] = array(
+									'key'			=> 'ifooter_nav_title_'.$i,
+									'type'			=> 'text',
+									'label'		 	=> sprintf( __( 'Nav %s | Title', 'pagelines' ), $i ),
+								);
+			
+			$menu_options[] = array(
+									'key'			=> 'ifooter_nav_menu_'.$i,
+									'type'			=> 'select_menu',
+									'label'		 	=> sprintf( __( 'Nav %s | Select Menu', 'pagelines' ), $i ),
+								);
+			
+			$menu_options[] = array(
+									'type'			=> 'divider',
+								);
+			
+		}
+
 		$options = array(
-		 	array(
+
+			array(
 				'type' 			=> 'multi',
-				'title' 		=> __( 'Logo', 'pagelines' ),
+				'title' 		=> __( 'Breadcrumbs', 'pagelines' ),
 				'opts'			=> array(
-					
+
 					array(
-						'key'		=> 'text',
-						'type' 		=> 'textarea',
-						'label' 	=> __( 'Tagline Text', 'pagelines' ),
+						'type'		=> 'check',
+						'key'		=> 'footer_top_disable',
+						'label'		=> __( 'Hide Breadcrumbs & Navigation Columns?', 'pagelines' ),
+						'default'	=> false
 					),
 					
+					array(
+						'key'		=> 'breadcrumbs_icon',
+						'type' 		=> 'image_upload',
+						'label' 	=> __( 'Breadcrumbs Icon', 'pagelines' ),
+						'help'		=> 'Must be 32px by 32px.',
+					),
+
+				)
+
+			),
+
+			array(
+				'type' 			=> 'multi',
+				'title' 		=> __( 'Navigation Columns', 'pagelines' ),
+				'opts'			=> $menu_options,
+			),
+			
+
+
+		 	array(
+				'type' 			=> 'multi',
+				'title' 		=> __( 'Bottom Credits', 'pagelines' ),
+				'col'			=> 2,
+				'opts'			=> array(
+
 					array(
 						'key'		=> 'copy',
 						'type' 		=> 'text',
 						'label' 	=> __( 'Copyright text or similar.', 'pagelines' ),
 					),
 
-				)
-			),
-			
-			array(
-				'type' 			=> 'multi',
-				'col'			=> 2,
-				'title' 		=> __( 'Navigation Columns', 'pagelines' ),
-				'opts'			=> array(
-
 					array(
-						'key'			=> 'if_nav_menu',
-						'type'			=> 'select_menu',
-						'label'		 	=> __( 'Nav Menu', 'pagelines' ),
+						'key'		=> 'tagline',
+						'type' 		=> 'text',
+						'label' 	=> __( 'Tagline Text', 'pagelines' ),
 					),
+
 				)
 			),
-			
 			
 		);
+
 		return $options;
 
 	}
@@ -58,47 +99,108 @@ class iFooter extends PageLinesSection {
 	
    function section_template() { 
 	
-		$text = ( $this->opt('text') ) ? $this->opt('text') : 'Designed by PageLines in California.';
-		
-		$copy = ( $this->opt('copy') ) ? $this->opt('copy') : 'Copyright &copy; 2014 iBlogPro. All rights reserved';
+		$breadcrumbs_icon = ( $this->opt('breadcrumbs_icon') ) ? $this->opt('breadcrumbs_icon') : PL_PARENT_URL.'/images/default-favicon.png';
 
-		$menu = ( $this->opt('if_nav_menu') ) ? $this->opt('if_nav_menu') : false; 
+		$hide_footer_top = ( $this->opt('footer_top_disable') ) ? $this->opt('footer_top_disable') : false;
+		
+		$tagline = ( $this->opt('tagline') ) ? $this->opt('tagline') : 'Designed by PageLines in California.';
+		
+		$copy = ( $this->opt('copy') ) ? $this->opt('copy') : 'Copyright &copy; 2014 iBlogPro All rights reserved.';
+		
+		
+		$cols = array(); 
+		for( $i = 1; $i <= 4; $i++ ){
+			
+			$menu =  ( $this->opt('ifooter_nav_menu_'.$i) ) ? $this->opt('ifooter_nav_menu_'.$i) : false;
+			
+			
+			
+			$cols[ $i ] = array(
+				'menu'		=> false, 
+				'title'		=> false
+			);
+			
+			if( $menu && is_array( wp_get_nav_menu_items( $menu ) ) ){
+				$args = array(
+					'menu'            	=> '',
+					'echo'            	=> false,
+					'items_wrap'      	=> '%3$s',
+					'container'			=> ''
+				);
+				$cols[ $i ]['menu'] = wp_nav_menu( $args );
+			}
+				
+			
+			$cols[ $i ]['title'] = ( $this->opt('ifooter_nav_title_'.$i) ) ? $this->opt('ifooter_nav_title_'.$i) : false;
+		
+		}
 		
 	
 	?>
 	
-	<div class="ifooter-container row">
-		<div class="span4">
+
+		<?php if( '1' !== $hide_footer_top ): ?>
 			
-			<div class="tagline-text">
-				<p><?php echo $text; ?></p>
-			</div>
-			<div class="copyright-text">
-				<p><?php echo $copy; ?></p>
-			</div>
-		</div>
-		<div class="span8">
+			<div class="ifooter-top row fix">
 
-	       		
-	       		<?php 	
-					if ( is_array( wp_get_nav_menu_items( $menu ) ) || has_nav_menu( 'if_nav_menu' ) ) {
-					wp_nav_menu(
-						array(
-							'menu_class'		=> 'ifooter_nav',
-							'menu'				=> $menu,
-							'container'			=> null,
-							'depth'				=> 1,
-							'fallback_cb'		=> '',
-							'theme_location'	=> 'main_nav',
-						)
-					);
-					} else 
-						pl_nav_fallback('ifooter_nav');
-					?>
+				<div class="row">
+					<div class="breadcrumbs-container fix">
+						<a href="<?php echo home_url();?>" class="breadcrumbs-icon"><img src="<?php echo $breadcrumbs_icon; ?>" /></a>
+						<?php if (function_exists('pl_breadcrumbs')) pl_breadcrumbs(); ?>
+					</div>
+				</div>
 
-		</div>
-	</div>
-	
+				<div class="row">
+					<div class="span3">
+						<?php 
+						
+							$title = ( $cols[1]['title'] ) ? $cols[1]['title'] : __('Pages','pagelines'); 
+							$menu = ( $cols[1]['menu'] ) ? $cols[1]['menu'] : pl_list_pages(); 
+							
+							echo pl_media_list( $title, $menu ); 
+						?>
+						
+					</div>
+					<div class="span3">
+						<?php 
+						
+							$title = ( $cols[2]['title'] ) ? $cols[2]['title'] : __('Categories','pagelines'); 
+							$menu = ( $cols[2]['menu'] ) ? $cols[2]['menu'] : pl_popular_taxonomy(); 
+							
+							echo pl_media_list( $title, $menu ); 
+						?>
+					</div>
+					<div class="span3">
+						<?php 
+						
+							$title = ( $cols[3]['title'] ) ? $cols[3]['title'] : __('Tags','pagelines'); 
+							$menu = ( $cols[3]['menu'] ) ? $cols[3]['menu'] : pl_popular_taxonomy( 6, 'post_tag'); 
+							
+							echo pl_media_list( $title, $menu ); 
+						?>
+					</div>
+					<div class="span3">
+						<?php 
+						
+							$title = ( $cols[4]['title'] ) ? $cols[4]['title'] : __('Pages','pagelines'); 
+							$menu = ( $cols[4]['menu'] ) ? $cols[4]['menu'] : pl_list_pages(); 
+							
+							echo pl_media_list( $title, $menu ); 
+						?>
+					</div>
+				</div>
+
+			</div><!-- end .ifooter-top -->
+
+		<?php endif; ?>
+
+		<div class="ifooter-bottom">
+			<p>
+				<span class="copyright-text"><?php echo $copy; ?></span>
+				<span class="tagline-text"><?php echo $tagline; ?></span>
+			</p>
+		</div><!-- end .ifooter-bottom -->
+
 	
 	<?php
 	}

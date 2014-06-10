@@ -4,13 +4,13 @@
 	Author: PageLines
 	Author URI: http://www.pagelines.com
 	Description: Awesome animated stat bars used them to show stats or other information.
-	Class Name: PLIChart
+	Class Name: iChart
 	Cloning: true
 	Edition: pro
 	Filter: post-format
 */
 
-class PLIChart extends PageLinesSection {
+class iChart extends PageLinesSection {
 
 	var $default_limit = 3;
 

@@ -4,12 +4,12 @@ Section: iSlider
 Author: PageLines
 Author URI: http://www.pagelines.com
 Description: A professional and versatile slider section. 
-Class Name: PLISlider
+Class Name: iSlider
 Filter: slider, full-width
 */
 
 
-class PLISlider extends PageLinesSection
+class iSlider extends PageLinesSection
 {
     
     var $default_limit = 3;
@@ -20,8 +20,8 @@ class PLISlider extends PageLinesSection
     
     function section_styles(){
         
-        wp_enqueue_script('flexslider', $this->base_url . '/flexslider.js', array('jquery'), pl_get_cache_key(), true);
-        wp_enqueue_script('islider', $this->base_url . '/islider.js', array('jquery'), pl_get_cache_key(), true);
+        wp_enqueue_script( 'flexslider', PL_JS . '/script.flexslider.js', array( 'jquery' ), pl_get_cache_key(), true );
+        wp_enqueue_script( 'islider', $this->base_url . '/islider.js', array('jquery'), pl_get_cache_key(), true);
     }
     
     function section_opts(){
@@ -117,13 +117,10 @@ class PLISlider extends PageLinesSection
                 $the_img = ( $the_img ) ? $the_img : $this->base_url.'/space.jpg';
 
                 $img = sprintf('<img src="%s" alt="">', $the_img);           
-                
-
-                //$header = sprintf(' ', $count, $title, $text, $link_text);
 
                 $title = sprintf('<h2 data-sync="islider_array_slide%s_title">%s</h2>', $count, $title);
 
-                $text = sprintf('<h3 data-sync="islider_array_slide%s_text">%s</h3>', $count, $text);
+                $text = sprintf('<p data-sync="islider_array_slide%s_text">%s</p>', $count, $text);
 
                 if( $link ){
                     $link_text = sprintf('<a data-sync="islider_array_slide%s_link_text" href="%s">%s <i class="icon icon-chevron-right"></i></a>', $count, $link, $link_text);
@@ -131,17 +128,11 @@ class PLISlider extends PageLinesSection
                     $link_text = '';
                 };
 
-                
-
+                $content = sprintf('<div  data-sync="islider_array_slide%s" class="islider-content"><div class="islider-inner"> %s %s %s </div></div>', $count, $title, $text, $link_text);
 
                 $output .= sprintf(
-                    '<li>
-                        <div class="islider-header"> %s %s %s </div>
-                        %s
-                    </li>',
-                    $title,
-                    $text,
-                    $link_text,
+                    '<li>%s %s</li>',
+                    $content,
                     $img
                 );
                 

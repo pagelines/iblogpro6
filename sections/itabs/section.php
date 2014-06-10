@@ -4,49 +4,31 @@
 	Section: iTabs
 	Author: PageLines
 	Author URI: http://www.pagelines.com
-	Description: An easy way to create and configure different tab types (Vertical, Horizontal and Accordion).
-	Class Name: PLITabs
-	Filter: dual-width, tabs
+	Description: An easy way to create and configure responsive tabs.
+	Class Name: iTabs
+	Filter: component
 */
 
 
+class iTabs extends PageLinesSection {
 
 
-class PLITabs extends PageLinesSection {
+	function section_styles(){
+		
+		wp_enqueue_script( 'ResponsiveTabs', $this->base_url.'/responsiveTabs.min.js', array( 'jquery' ), pl_get_cache_key(), true );
 
-	var $default_limit = 3;
+	}
 
 	function section_opts(){
 
 		$options = array();
 
 		$options[] = array(
-
-			'title' => __( 'iTabs Configuration', 'pagelines' ),
-			'key'	=> 'tabs_config',
-			'type'	=> 'multi',
-			'opts'	=> array(
-				array(
-					'type' 		=> 'select',
-					'key'		=> 'tabs_type',
-					'label' 	=> 'Tabs Type',
-					'opts'		=> array(
-						'default'	=> array('name' => 'Horizontal (Default)'),
-						'vertical'	=> array('name' => 'Vertical'),
-						'accordion'	=> array('name' => 'Accordion'),
-					),
-					'default'	=> 'default'
-				),
-			)
-
-		);
-
-		$options[] = array(
 			'key'		=> 'tabs_array',
 	    	'type'		=> 'accordion', 
 			'col'		=> 2,
-			'title'		=> __('Tabs Setup', 'pagelines'), 
-			'post_type'	=> __('Tab', 'pagelines'), 
+			'title'		=> __('iTabs Setup', 'pagelines'), 
+			//'post_type'	=> __('iTab', 'pagelines'), 
 			'opts'		=> array(
 				array(
 					'key'		=> 'title',
@@ -72,50 +54,22 @@ class PLITabs extends PageLinesSection {
 	}
 
 	function section_head(){ 
-		
+
 		?>
 		
 		<script>
-
 		!function ($) {
-				$(document).on('sectionStart', function( e ) {
 
-					$('<?php echo $this->prefix(); ?> #default').easyResponsiveTabs({
-			            type: 'default', //default, vertical, accordion;
-		                width: 'auto',
-		                fit: true,
-		                closed: true,
-			        });
+			$(document).on('sectionStart', function( e ) {
 
-					$('<?php echo $this->prefix(); ?> #vertical').easyResponsiveTabs({
-			            type: 'vertical', 
-		                width: 'auto',
-		                fit: true,
-		                closed: false,
-			        });
+		        RESPONSIVEUI.responsiveTabs();
 
-					$('<?php echo $this->prefix(); ?> #accordion').easyResponsiveTabs({
-			            type: 'accordion', 
-		                width: 'auto',
-		                fit: true,
-		                closed: false,
-			        });
+			})
 
-				})
-			}(window.jQuery); 
-
+		}(window.jQuery); 
 		</script>
-		
 
 	<?php }
-	
-
-	function section_styles(){
-		
-		wp_enqueue_script( 'ResponsiveTabs', $this->base_url.'/easyResponsiveTabs.js',  true );
-
-	}
-
 	
 
    function section_template( ) {
@@ -125,10 +79,7 @@ class PLITabs extends PageLinesSection {
 		if( !$tabs_array || $tabs_array == 'false' || !is_array($tabs_array) ){
 			$tabs_array = array( array(), array(), array() );
 		}
-
 		
-		$width = 0;
-		$content_out = '';
 		$output = '';
 		$count = 1; 
 	
@@ -141,48 +92,36 @@ class PLITabs extends PageLinesSection {
 	
 				$title = pl_array_get( 'title', $item, 'Tab '. $count); 
 				
-				$content = pl_array_get( 'content', $item, 'Content for tab '. $count); 
+				$content = pl_array_get( 'content', $item, 'iTab Section: Tab '. $count); 
 				
-				$link = pl_array_get( 'link', $item ); 
+				$link = pl_array_get( 'link', $item); 
 				
-				$user_class = pl_array_get( 'class', $item );
+				$user_class = pl_array_get( 'class', $item);
 				
-				$title = sprintf('<span data-sync="tabs_array_item%s_title">%s</span>', $count, $title );
-			
-				$content = sprintf('<div data-sync="tabs_array_item%s_content">%s</div>', $count, $content );
+				$title = sprintf('<h2 data-sync="tabs_array_item%s_title">%s</h2>', $count, $title);
 
-				$output .= sprintf(
-					'<li class="%s">%s</li>',
-					$user_class,
-					$title
-				);
-				$content_out .= sprintf('%s', $content);
-				
+				$content = sprintf('<div data-sync="tabs_array_item%s_content" class="%s">%s</div>',  $count, $user_class, $content);
+
+				$output .= sprintf('%s %s', $title, $content);
+
 				$count++;
 			}
 				
 		}
-
-		$tabs_type = ($this->opt('tabs_type', $this->oset)) ? $this->opt('tabs_type', $this->oset) : 'default';
 		
-
 		printf('
 			<div class="itabs row">
-				<div id="%s">
-					<ul class="resp-tabs-list">
-		                %s
-		            </ul>
-					<div class="resp-tabs-container">
-						%s
-		            </div>
-				</div>
+				<div class="responsive-tabs">
+		            	%s
+		        </div>
 			</div>', 
-			$tabs_type, 
-			$output, 
-			$content_out
+			$output
 		);
+
+		?>
+
 		
-		$scopes = array('local', 'type', 'global');
+		<?php
 
 	}	
 }

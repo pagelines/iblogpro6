@@ -3,137 +3,134 @@
 
 	overflow-x: hidden;
 	
-	.islider-header{
-		display: inline-block;
+	.islider-content{
+		display: table;
+		vertical-align: middle;
 		position: absolute;
-		z-index: 10;
-		height: 50%;
-		padding: 0 80px;
-		overflow: auto;
-		margin: auto;
 		top: 0; left: 0; bottom: 0; right: 0;
+		z-index: 10;
+		height: 100%;
+		width: 80%;
+		padding: 0 10%;
+		overflow: hidden;
 		text-align: center;
 		color: @white;
 
-		a{
-			color: @white;
+		.islider-inner{
+			display: table-cell;
+			vertical-align: middle;
+			font-weight: 300;
 
-			i{
-				height: 14px;
-				width: 14px;
-				margin-left: 5px;
-				padding: 4px;
-				border-radius: 50px;
-				border: 2px solid #fff;
+			h2{
+				font-size: @h2Size + 22;
+			}
+		
+			p{
+				font-size: 22px;
+				line-height: 1.4em;
+			}
+			
+			a{
+				display: block;
+				margin-top: 20px; 
+				font-size: @baseFontSize + 8;
+				color: @white;
+
+				&:hover{
+					opacity: .8;
+				}
+
+				i{
+					font-size: @baseFontSize;
+					height: 14px;
+					width: 14px;
+					margin-left: 5px;
+					padding: 6px;
+					border-radius: 50px;
+					border: 2px solid @white;
+				}
 			}
 		}
-		
-
 	}
+
 
 	.flex-slider { 
  		
 		position: relative;
-		max-width: 86%; 
 		margin: 0 auto; 
-		padding: 20px 0 0 0; 
-		
-		.no-js .slides > li:first-child { 
-			display: block; 
+
+		.islider-viewport { 
+
+			.slides { 
+			
+				zoom: 1; 
+				display: block;
+				list-style: none;
+				height: 100%;
+				
+				
+				li { 
+					display: none;  
+					position: relative;
+					height: 100%;
+
+					img {
+						display: block; 
+						height: auto;
+						width: 100%;
+					}
+				}
+
+				&:after{
+					visibility: hidden; 
+					line-height: 0; 
+					height: 0; 
+				}
+			}
 		}
-		
+
+
 		.islider-direction-nav {
 
 			li{
-				display: inline-block;
-
+				
 				a{
 					position: absolute;
 					display: inline-block;
 					top: 0; 
 				   	height: 100%;
 			   		width: 68px;
-					font-size: 0;
-					opacity: .3;
-					.transition(opacity 0.1s ease-in-out);
+			   		font-size: 0;
+			   		opacity: .33;
+					.transition(opacity .15s ease-in-out);
 
 				   	&.islider-prev{
-				   		left: -85px;
-				   		background: url(@{plChildRoot}/sections/islider/prev_2x.png) no-repeat center center;
+				   		left: 20px;
+				   		background: url(@{plChildRoot}/sections/islider/images/prev_2x.png) no-repeat center center;
 				   		background-size: 68px 131px;
 				   	}
 
 				   	&.islider-next{
-				   		right: -85px;
-				   		background: url(@{plChildRoot}/sections/islider/next_2x.png) no-repeat center center;
+				   		right: 20px;
+				   		background: url(@{plChildRoot}/sections/islider/images/next_2x.png) no-repeat center center;
 				   		background-size: 68px 131px;
 				   	}
-				   	
 				   	&:hover{
 				   		opacity: 1;
 				   	}
 				}
-
 			}
-
 		}
 
-		.islider-viewport { 
 			
-			//overflow: visible!important; 
-
-
-			.slides { 
-			
-				zoom: 1; 
-				display: block;
-				margin: 0; 
-				list-style: none;
-				
-				li { 
-					display: none;  
-					position: relative; 
-					
-
-					img {
-						display: block; 
-						height: auto;
-						width:100%;
-						margin: 0 auto;
-						padding: 0 15px;
-						cursor: default;
-						opacity: .33;
-						-webkit-filter: grayscale(1);
-						box-sizing: border-box;
-						.transition(all .3s);
-						
-					}
-				}
-
-				li.islider-active-slide img {
-					cursor: pointer; 
-					opacity: 1; 
-					-webkit-filter: grayscale(0%);
-				}
-
-				&:after{
-					
-					visibility: hidden; 
-					line-height: 0; 
-					height: 0; 
-				}
-
-			}
-	
-		}
-
 		.islider-control-nav{
+				margin-top: 10px;
 				text-align: center;
 			li{
 				display: inline-block;
 				margin: 0 5px;
-width: 12px;
-height: 12px;
+				width: 12px;
+				height: 12px;
 			}
 			a{
 				cursor: pointer;
@@ -152,11 +149,31 @@ height: 12px;
 					width: 10px; 
 					height: 10px; 
 					background: transparent; 
-					border: 1px solid #999;
+					border: 1px solid @pl-link;
 				}
 			}
 		}
 	
+	@media screen and ( max-width:@resPortraitTablet ){
+
+		.islider-direction-nav{
+			display: none;
+		}
+		a.islider-prev, a.islider-next{
+			display: none;
+		}
+		.flex-slider{
+			max-width: 100%;
+		}	
+		.islider-inner{
+			h2{ font-size:30px;	}
+			p{
+				display: none;
+			}
+			a{font-size:14px; }
+		}
+
+	}
 
 
 	}

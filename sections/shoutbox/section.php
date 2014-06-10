@@ -5,34 +5,10 @@
 	Author URI: http://www.pagelines.com
 	Description: A simple shout box.
 	Class Name: PLShoutBox
-	Edition: pro
 	Filter: component
-	Loading: active
 */
 
 class PLShoutBox extends PageLinesSection {
-	
-	function section_head(){
-
-			
-		?>
-	
-		<style>
-			<?php echo $this->prefix(); ?> .shoutbox-wrap{
-				background-color: <?php echo pl_hashify($this->opt('shoutbox_background_color')); ?>;
-				color: <?php echo pl_hashify($this->opt('shoutbox_text_color')); ?>;
-			}
-			<?php echo $this->prefix(); ?> .shoutbox-wrap a{ 
-				color: <?php echo pl_hashify($this->opt('shoutbox_text_color')); ?>;
-				border: 1px solid <?php echo pl_hashify($this->opt('shoutbox_text_color')); ?>;
-			}
-			<?php echo $this->prefix(); ?> .shoutbox-wrap .close-shoutbox{
-				color: <?php echo pl_hashify($this->opt('shoutbox_text_color')); ?>;
-			}
-		</style>	
-		
-		<?php
-	}
 
 	function section_opts(){
 		$opts = array(
@@ -49,28 +25,6 @@ class PLShoutBox extends PageLinesSection {
 				'label' 	=> __( 'ShoutBox Settings', 'pagelines' ),
 				'opts'		=> array(
 					array(
-						'key'			=> 'shoutbox_text_color',
-						'type' 			=> 'color',
-						'label' 		=> __( 'Text Color', 'pagelines' ),
-						'default' 		=> 'FFFFFF',
-					),
-					array(
-						'key'			=> 'shoutbox_background_color',
-						'type' 			=> 'color',
-						'label' 		=> __( 'Background Color', 'pagelines' ),
-						'default' 		=> '59B1F6',
-					),
-					array(
-						'key'			=> 'shoutbox_font_size',
-						'type'			=> 'count_select',
-						'count_start'	=> 10,
-						'count_number'	=> 30,
-						'suffix'		=> 'px',
-						'title'			=> __( 'Font Size', 'pagelines' ),
-						'default'		=> '', 
-					),
-					
-					array(
 						'type' 			=> 'select',
 						'key'			=> 'shoutbox_align',
 						'label' 		=> 'Alignment',
@@ -81,7 +35,7 @@ class PLShoutBox extends PageLinesSection {
 							'textjustify'	=> array('name' => 'Justify'),
 						)
 					),	
-					array(
+				array(
 						'key'		=> 'shoutbox_pad',
 						'type' 		=> 'text',
 						'label' 	=> __( 'Padding <small>(CSS Shorthand)</small>', 'pagelines' ),
@@ -108,9 +62,8 @@ class PLShoutBox extends PageLinesSection {
 		
 		$padding = ($this->opt('shoutbox_pad')) ? sprintf('padding: %s;', $this->opt('shoutbox_pad')) : ''; 
 		
-		$fontsize = ($this->opt('shoutbox_font_size')) ? sprintf('font-size: %spx;', $this->opt('shoutbox_font_size')) : ''; 
 		
-		printf('<div class="shoutbox-wrap fade in %s" style=" %s %s ">%s <button type="button" class="close-shoutbox" href="#" data-dismiss="alert">×</button></div>', $align, $padding, $fontsize, $content);
+		printf('<div class="shoutbox-wrap fade in %s" style="%s">%s <button type="button" class="close-shoutbox" href="#" data-dismiss="alert">×</button></div>', $align, $padding, $content);
 		
 	}
 }
