@@ -28,7 +28,6 @@ class iTabs extends PageLinesSection {
 	    	'type'		=> 'accordion', 
 			'col'		=> 2,
 			'title'		=> __('iTabs Setup', 'pagelines'), 
-			//'post_type'	=> __('iTab', 'pagelines'), 
 			'opts'		=> array(
 				array(
 					'key'		=> 'title',
@@ -37,7 +36,7 @@ class iTabs extends PageLinesSection {
 				),
 				array(
 					'key'		=> 'content',
-					'label' 	=> __( 'Tab Content (HTML)', 'pagelines' ),
+					'label' 	=> __( 'Tab Content', 'pagelines' ),
 					'type'		=> 'textarea',
 					'help'		=> __( 'Supports Text and HMTL', 'pagelines' )
 				),
@@ -117,11 +116,6 @@ class iTabs extends PageLinesSection {
 			</div>', 
 			$output
 		);
-
-		?>
-
-		
-		<?php
 
 	}	
 }

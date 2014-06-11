@@ -58,7 +58,7 @@ class iBlog extends PageLinesSection {
 		
 		?>
 		<div class="row fix ipost">
-			<div class="span1 the-date">
+			<div class="span1 ipost-date">
 					<span class="day"><?php echo do_shortcode( '[post_date format="d"]' ); ?></span>
 					<span class="month"><?php echo do_shortcode( '[post_date format="M"]' ); ?></span>
 			</div>
@@ -80,7 +80,7 @@ class iBlog extends PageLinesSection {
 					?>
 				
 					<?php if( ! $linkbox || is_single() ): ?>
-					<div class="the-text">
+					<div class="ipost-text">
 						<?php if( ! $linkbox  ): ?>
 							<h2 class="title"><a href="<?php the_permalink(); ?>"><?php echo get_the_title(); ?></a></h2>
 						<?php endif; ?>
