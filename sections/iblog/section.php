@@ -25,26 +25,7 @@ class iBlog extends PageLinesSection {
 		
 		$options = array();
 
-		$options[] = array(
-
-			'title' => __( 'Configuration', 'pagelines' ),
-			'key'	=> 'pb_config',
-			'col'	=> 1,
-			'type'	=> 'multi',
-			'opts'	=> array(
-				array(
-					'key'			=> 'hide_karma',
-					'type' 			=> 'check',
-					'label' 	=> __( 'Hide Social Counter?', 'pagelines' ),
-				),
-				array(
-					'key'			=> 'hide_comment_link',
-					'type' 			=> 'check',
-					'label' 	=> __( 'Hide Comment Counter/Link?', 'pagelines' ),
-				),
-			)
-
-		);
+		
 
 		return $options;
 		
@@ -76,14 +57,12 @@ class iBlog extends PageLinesSection {
 		$post_id = get_the_ID();
 		
 		?>
-		<div class="row fix">
-			<div class="span2">
-				<div class="post-date">
+		<div class="row fix ipost">
+			<div class="span1 the-date">
 					<span class="day"><?php echo do_shortcode( '[post_date format="d"]' ); ?></span>
 					<span class="month"><?php echo do_shortcode( '[post_date format="M"]' ); ?></span>
-				</div>
 			</div>
-			<div class="span10">
+			<div class="span10 offset1">
 				
 				<article id="post-<?php the_ID(); ?>" <?php post_class( $classes ); ?>>
 					<?php  if( is_single() ): ?>
@@ -112,7 +91,7 @@ class iBlog extends PageLinesSection {
 									if( ! is_single() ) 
 										echo get_the_excerpt();
 									else{
-										the_content( __( 'Continue Reading... <span class="meta-nav">&rarr;</span>', 'pagelines' ) );
+										the_content( __( 'Continue Reading.. <span class="meta-nav">&rarr;</span>', 'pagelines' ) );
 
 										wp_link_pages( array(
 											'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'pagelines' ) . '</span>',
