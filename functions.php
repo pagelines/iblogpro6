@@ -5,6 +5,10 @@
 define( 'DMS_CORE', true );
 require_once( 'dms/functions.php' );
 
+
+
+/* Add Google Font to option panel */
+
 add_filter ( 'pagelines_foundry', 'iblog_google_fonts' );
 
 function iblog_google_fonts($fonts){
@@ -19,6 +23,17 @@ function iblog_google_fonts($fonts){
 	
     return $fonts;
 }
+
+/*  */
+
+function pl_excerpt_more($more) {
+   global $post;
+   return '<a class="read-more fix" href="'. get_permalink($post->ID) . '">' . 'Continue Reading <i class="icon icon-chevron-right ibtn small"></i>' . '</a>';
+   }
+   add_filter('excerpt_more', 'pl_excerpt_more');
+
+
+/* Footer Breadcrumbs */
 
 function pl_breadcrumbs() {
 

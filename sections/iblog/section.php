@@ -66,7 +66,7 @@ class iBlog extends PageLinesSection {
 				
 				<article id="post-<?php the_ID(); ?>" <?php post_class( $classes ); ?>>
 					<?php  if( is_single() ): ?>
-						<div class="the-nav fix">
+						<div class="ipost-nav fix">
 							<span class="previous"><?php previous_post_link('%link', '<i class="icon icon-angle-left"></i> %title') ?></span>
 							<span class="next"><?php next_post_link('%link', '%title <i class="icon icon-angle-right"></i>') ?></span>
 						</div>
@@ -91,7 +91,7 @@ class iBlog extends PageLinesSection {
 									if( ! is_single() ) 
 										echo get_the_excerpt();
 									else{
-										the_content( __( 'Continue Reading.. <span class="meta-nav">&rarr;</span>', 'pagelines' ) );
+										the_content('...');
 
 										wp_link_pages( array(
 											'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'pagelines' ) . '</span>',
@@ -100,8 +100,9 @@ class iBlog extends PageLinesSection {
 											'link_after'  => '</span>',
 										) );
 									}
-										
 								?>
+
+								<?php echo do_shortcode( '[post_tags]' ); ?>
 								
 							</div>
 					</div>
