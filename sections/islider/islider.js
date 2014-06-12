@@ -1,20 +1,17 @@
 !function ($) {
 	$(window).load(function(){
-	
-		$('.islider-container').flexslider({
-			
-				namespace: "islider-",
-				animation: "slide",
-				//startAt: 0,
-				//slideshow: false,
-				fadeFirstSlide: true, 
-				animationLoop: false,
-				directionNav: true,
-				smoothHeight: true,
-				//controlNav: true,
-				touch: true,
 
-	    });
+	    $('.islider').flexslider({
+	        animation: "fade",
+	        slideshow: false,
+	        fadeFirstSlide: true, 
+	        animationLoop: true,
+	        directionNav: true,
+	        controlNav: false,  
+	        //smoothHeight: true,
+	        touch: true,
+
+	      });
 
 	})
 }(window.jQuery);
