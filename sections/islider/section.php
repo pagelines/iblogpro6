@@ -53,6 +53,7 @@ class iSlider extends PageLinesSection
                     'key'           => 'element_color',
                     'label'         => __( 'Text', 'pagelines' ),
                     'type'          => 'select',
+                    'default'       => 'element-light',
                     'opts'  => array(
                         'element-light'  => array('name'=> 'Light Text and Elements'),
                         'element-dark'   => array('name'=> 'Dark Text and Elements'),
@@ -143,11 +144,12 @@ class iSlider extends PageLinesSection
             
             $islider_array = array(
                 array(
-                    'image'    => $this->base_url . '/images/default.jpg',
-                    'title' => 'iSlider',
-                    'text'   => 'Congrats! You have successfully installed this slider.<br /> Now just set it up.',
-                    'link'      => 'http://www.pagelines.com/',
-                    'link_text'  => 'Visit PageLines.com'
+                    'image'         => $this->base_url . '/images/default.jpg',
+                    'element_color' => 'element-light',
+                    'title'         => 'iSlider',
+                    'text'          => 'Congrats! You have successfully installed this slider.<br /> Now just set it up.',
+                    'link'          => 'http://www.pagelines.com/',
+                    'link_text'     => 'Visit PageLines.com'
                 ),
                 
             );
