@@ -148,7 +148,7 @@ class iHeader extends PageLinesSection {
 
    		$hide_social = ( $this->opt('iheader_social_disable') ) ? $this->opt('iheader_social_disable') : false;
 
-   		$home_icon = ( $this->opt('icon') ) ? $this->opt('icon') : 'icon-home';
+   		$home_icon = ( $this->opt('icon') ) ? $this->opt('icon') : 'pagelines';
 
 		$menu = ( $this->opt('iheader_menu') ) ? $this->opt('iheader_menu') : false;
 
