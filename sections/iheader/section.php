@@ -90,7 +90,12 @@ class iHeader extends PageLinesSection {
 				'col'	=> 2,
 				'opts'	=> array(
 					array(
-						'key'	=> 'navi_help',
+						'key'	=> 'icon',
+						'label'	=> __( 'Home Icon', 'pagelines' ),
+						'type'	=> 'select_icon'
+					),
+					array(
+						'key'	=> 'iheader_nav_help',
 						'type'	=> 'help_important',
 						'label'	=> __( 'Using Megamenus (multi column drop down)', 'pagelines' ),
 						'help'	=> __( 'Want a full width, multi column "mega menu"? Simply add a class of "megamenu" to the list items using the WP menu creation tool.', 'pagelines' )
@@ -142,6 +147,8 @@ class iHeader extends PageLinesSection {
    		$social_icons = $this->social_icons(); 
 
    		$hide_social = ( $this->opt('iheader_social_disable') ) ? $this->opt('iheader_social_disable') : false;
+
+   		$home_icon = ( $this->opt('icon') ) ? $this->opt('icon') : 'icon-home';
 
 		$menu = ( $this->opt('iheader_menu') ) ? $this->opt('iheader_menu') : false;
 
@@ -199,7 +206,7 @@ class iHeader extends PageLinesSection {
 				<li>
 					<a href="<?php echo home_url(); ?>" title="<?php bloginfo("name"); ?>">
 						
-						<i class="icon icon-home"></i>
+						<i class="icon icon-<?php echo $home_icon; ?>"></i>
 					
 					</a>
 				</li>
