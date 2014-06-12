@@ -50,13 +50,22 @@ class iSlider extends PageLinesSection
                     'type'      => 'text'
                 ),
                 array(
+                    'key'           => 'element_color',
+                    'label'         => __( 'Text', 'pagelines' ),
+                    'type'          => 'select',
+                    'opts'  => array(
+                        'element-light'  => array('name'=> 'Light Text and Elements'),
+                        'element-dark'   => array('name'=> 'Dark Text and Elements'),
+                    )
+                ),
+                array(
                     'key'       => 'link',
-                    'label'     => __( 'Link (Optional)', 'pagelines' ),
+                    'label'     => __( 'Primary Link (Optional)', 'pagelines' ),
                     'type'      => 'text'
                 ),
                 array(
                     'key'       => 'link_text',
-                    'label'     => __( 'Link Text', 'pagelines' ),
+                    'label'     => __( 'Primary Text', 'pagelines' ),
                     'type'      => 'text'
                 ),
             )
@@ -84,6 +93,8 @@ class iSlider extends PageLinesSection
 
                     $text = pl_array_get( 'text', $slide); 
 
+                    $element_color = pl_array_get( 'element_color', $slide ); 
+
                     $link = pl_array_get( 'link', $slide);
 
                     $link_text = pl_array_get( 'link_text', $slide );
@@ -104,7 +115,7 @@ class iSlider extends PageLinesSection
                         $link_text = '';
                     };
 
-                    $content = sprintf('<div data-sync="islider_array_slide%s" class="content"> %s %s %s </div>', $count, $title, $text, $link_text);
+                    $content = sprintf('<div data-sync="islider_array_slide%s" class="content %s"> %s %s %s </div>', $count, $element_color, $title, $text, $link_text);
 
                     $output .= sprintf(
                         '<li>%s %s</li>',

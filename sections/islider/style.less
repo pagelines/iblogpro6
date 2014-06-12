@@ -58,27 +58,44 @@
 		position: absolute;
 		display: inline-block;
 		top: 50%;
-		text-align: center;
 		width: 80%;
-		margin: -10% 10% 0 10%;
-		color: #fff;
+		margin: -8% 10% 0 10%;
+		text-align: center;
 
+		&.element-dark{
+			h2, p, a{
+				color: #333;
+
+				i{
+					border: 2px solid #333;
+				}
+			}
+		}
+
+		&.element-light{
+			h2, p, a{
+				color: #fff;
+				i{
+					border: 2px solid #fff;
+				}
+			}
+		}
 		
 		h2{
 			font-size: @h2Size + 22;
 			margin: 0;
 		}
 	
-		p{
-			font-size: 22px;
+		p, a{
+			font-size: 18px;
 			line-height: 1.4em;
+			margin-bottom: 15px;
 		}
 		
 		a{
 			display: block;
-			margin-top: 20px; 
-			font-size: @baseFontSize + 8;
-			color: @white;
+			margin: 0;
+			padding: 0;
 
 			&:hover{
 				opacity: .8;
@@ -89,8 +106,8 @@
 				height: 14px;
 				width: 14px;
 				padding: 6px;
+				margin-left: 8px;
 				border-radius: 50px;
-				border: 2px solid @white;
 			}
 		}
 
@@ -190,7 +207,7 @@
 
 
 
-	@media screen and (max-width: 860px) {
+	@media screen and (max-width:@resPortraitTablet) {
 	  .flex-direction-nav li a { display: none;}
 	  .content {
 			h2{ font-size:30px;	}
