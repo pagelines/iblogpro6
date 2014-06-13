@@ -41,22 +41,19 @@ class iFooter extends PageLinesSection {
 			array(
 				'type' 			=> 'multi',
 				'title' 		=> __( 'Breadcrumbs', 'pagelines' ),
-				'opts'			=> array(
-
+				'opts'			=> array(			
+					array(
+						'key'		=> 'breadcrumbs_icon',
+						'label'		=> __( 'Breadcrumbs Icon', 'pagelines' ),
+						'type'		=> 'select_icon',
+						'default' 	=> 'pagelines'
+					),
 					array(
 						'type'		=> 'check',
 						'key'		=> 'footer_top_disable',
 						'label'		=> __( 'Hide Breadcrumbs & Navigation Columns?', 'pagelines' ),
 						'default'	=> false
 					),
-					
-					array(
-						'key'		=> 'breadcrumbs_icon',
-						'type' 		=> 'image_upload',
-						'label' 	=> __( 'Breadcrumbs Icon', 'pagelines' ),
-						'help'		=> 'Must be 32px by 32px.',
-					),
-
 				)
 
 			),
@@ -99,7 +96,9 @@ class iFooter extends PageLinesSection {
 	
    function section_template() { 
 	
-		$breadcrumbs_icon = ( $this->opt('breadcrumbs_icon') ) ? $this->opt('breadcrumbs_icon') : PL_PARENT_URL.'/images/default-favicon.png';
+		//$breadcrumbs_icon = ( $this->opt('breadcrumbs_icon') ) ? $this->opt('breadcrumbs_icon') : false;
+
+		$breadcrumbs_icon = ( $this->opt('breadcrumbs_icon') ) ? $this->opt('breadcrumbs_icon') : 'pagelines';
 
 		$hide_footer_top = ( $this->opt('footer_top_disable') ) ? $this->opt('footer_top_disable') : false;
 		
@@ -145,7 +144,7 @@ class iFooter extends PageLinesSection {
 
 				<div class="row">
 					<div class="breadcrumbs-container fix">
-						<a href="<?php echo home_url();?>" class="breadcrumbs-icon"><img src="<?php echo $breadcrumbs_icon; ?>" /></a>
+						<a href="<?php echo home_url();?>" class="breadcrumbs-icon"><i class="icon icon-<?php echo $breadcrumbs_icon; ?>"></i></a>
 						<?php if (function_exists('pl_breadcrumbs')) pl_breadcrumbs(); ?>
 					</div>
 				</div>
