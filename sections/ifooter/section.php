@@ -14,23 +14,23 @@ class iFooter extends PageLinesSection {
 	
 	function section_opts(){
 
-		$menu_options = array(); 
+		$nav_options = array(); 
 		
 		for( $i = 1; $i <= 4; $i++ ){
 			
-			$menu_options[] = array(
+			$nav_options[] = array(
 									'key'			=> 'ifooter_nav_title_'.$i,
 									'type'			=> 'text',
 									'label'		 	=> sprintf( __( 'Nav %s | Title', 'pagelines' ), $i ),
 								);
 			
-			$menu_options[] = array(
+			$nav_options[] = array(
 									'key'			=> 'ifooter_nav_menu_'.$i,
 									'type'			=> 'select_menu',
 									'label'		 	=> sprintf( __( 'Nav %s | Select Menu', 'pagelines' ), $i ),
 								);
 			
-			$menu_options[] = array(
+			$nav_options[] = array(
 									'type'			=> 'divider',
 								);
 			
@@ -51,7 +51,7 @@ class iFooter extends PageLinesSection {
 					array(
 						'type'		=> 'check',
 						'key'		=> 'footer_top_disable',
-						'label'		=> __( 'Hide Breadcrumbs & Navigation Columns?', 'pagelines' ),
+						'label'		=> __( 'Hide Breadcrumbs & Navigation areas?', 'pagelines' ),
 						'default'	=> false
 					),
 				)
@@ -61,7 +61,7 @@ class iFooter extends PageLinesSection {
 			array(
 				'type' 			=> 'multi',
 				'title' 		=> __( 'Navigation Columns', 'pagelines' ),
-				'opts'			=> $menu_options,
+				'opts'			=> $nav_options,
 			),
 			
 
@@ -95,8 +95,6 @@ class iFooter extends PageLinesSection {
 	
 	
    function section_template() { 
-	
-		//$breadcrumbs_icon = ( $this->opt('breadcrumbs_icon') ) ? $this->opt('breadcrumbs_icon') : false;
 
 		$breadcrumbs_icon = ( $this->opt('breadcrumbs_icon') ) ? $this->opt('breadcrumbs_icon') : 'pagelines';
 
@@ -121,7 +119,7 @@ class iFooter extends PageLinesSection {
 			
 			if( $menu && is_array( wp_get_nav_menu_items( $menu ) ) ){
 				$args = array(
-					'menu'            	=> '',
+					'menu'            	=> $menu,
 					'echo'            	=> false,
 					'items_wrap'      	=> '%3$s',
 					'container'			=> ''
