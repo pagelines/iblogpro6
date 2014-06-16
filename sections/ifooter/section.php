@@ -5,7 +5,6 @@
 	Author URI: http://www.pagelines.com
 	Description: iBlogPro stylized footer area with enhanced breadcrumb Navigation.
 	Class Name: iFooter
-	
 */
 
 

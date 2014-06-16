@@ -28,6 +28,7 @@ class iTabs extends PageLinesSection {
 	    	'type'		=> 'accordion', 
 			'col'		=> 2,
 			'title'		=> __('iTabs Setup', 'pagelines'), 
+			'post_type' => __('iTab', 'pagelines'), 
 			'opts'		=> array(
 				array(
 					'key'		=> 'title',
@@ -87,19 +88,19 @@ class iTabs extends PageLinesSection {
 			
 			$tabs = count( $tabs_array );
 			
-			foreach( $tabs_array as $item ){
+			foreach( $tabs_array as $tab ){
 	
-				$title = pl_array_get( 'title', $item, 'Tab '. $count); 
+				$title = pl_array_get( 'title', $tab, 'Tab '. $count); 
 				
-				$content = pl_array_get( 'content', $item, 'iTab Section: Tab '. $count); 
+				$content = pl_array_get( 'content', $tab, 'iTab Section: Tab '. $count); 
 				
-				$link = pl_array_get( 'link', $item); 
+				$link = pl_array_get( 'link', $tab); 
 				
-				$user_class = pl_array_get( 'class', $item);
+				$user_class = pl_array_get( 'class', $tab);
 				
-				$title = sprintf('<h2 data-sync="tabs_array_item%s_title">%s</h2>', $count, $title);
+				$title = sprintf('<h2 data-sync="tabs_array_tab%s_title">%s</h2>', $count, $title);
 
-				$content = sprintf('<div data-sync="tabs_array_item%s_content" class="%s">%s</div>',  $count, $user_class, $content);
+				$content = sprintf('<div data-sync="tabs_array_tab%s_content" class="%s">%s</div>',  $count, $user_class, $content);
 
 				$output .= sprintf('%s %s', $title, $content);
 

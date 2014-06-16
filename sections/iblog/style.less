@@ -1,7 +1,7 @@
 .section-iblog{
 
 	.ipost{
-		border-bottom:1px solid #e5e5e5;
+		border-bottom:1px solid #e6e6e6;
 		padding-bottom: 20px;
 		margin-bottom: 40px;
 
@@ -9,7 +9,7 @@
 			padding-bottom: 5px;
 			text-align: center;
 			color: #555;
-			border-bottom:1px solid #e5e5e5;
+			border-bottom:1px solid #e6e6e6;
 
 			.day, .month{
 				display: block;
@@ -24,7 +24,7 @@
 
 		.ipost-nav{
 			padding: 10px 0; 
-			border-bottom: 1px solid #e5e5e5; 
+			border-bottom: 1px solid #e6e6e6; 
 			margin-bottom: 10px;
 			> span{
 				
@@ -99,4 +99,11 @@
 			}
 		}
 	}
+	
+	@media screen and ( max-width:@resPortraitTablet ){
+		.ipost-date{
+			display: none;
+		}
+	}
+
 }
