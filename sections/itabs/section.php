@@ -111,7 +111,7 @@ class iTabs extends PageLinesSection {
 		
 		printf('
 			<div class="itabs row">
-				<div class="responsive-tabs">
+				<div class="tabs">
 		            	%s
 		        </div>
 			</div>', 

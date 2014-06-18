@@ -175,24 +175,26 @@ class iHeader extends PageLinesSection {
 
 		</div>
 
-		<div class="span6 offset2 icons">
+		<div class="span6 offset2">
 
 			<?php if( '1' !== $hide_social ): ?>
-			
-				<div class="icons">
-
-					<?php 
-					
-					foreach($social_icons as $icon){
-					
-						$url = ( pl_setting('iheader_'.$icon) ) ? pl_setting('iheader_'.$icon) : false;
-					
-						if( $url )
-							printf('<a href="%s" class="iheader-link" target="_blank"><i class="icon icon-%s"></i></a>', $url, $icon); 
-					}
 				
-					?>
+				<div class="icons-container">
+					<div class="icons">
 
+						<?php 
+						
+						foreach($social_icons as $icon){
+						
+							$url = ( pl_setting('iheader_'.$icon) ) ? pl_setting('iheader_'.$icon) : false;
+						
+							if( $url )
+								printf('<a href="%s" class="iheader-link" target="_blank"><i class="icon icon-%s"></i></a>', $url, $icon); 
+						}
+					
+						?>
+
+					</div>
 				</div>
 
 			<?php endif; ?>
@@ -217,7 +219,8 @@ class iHeader extends PageLinesSection {
 				echo pl_navigation( $menu_args );
 
 				if( ! $hide_search )
-					pagelines_search_form( true, 'iheader-searchform');
+					printf('<form method="get" class="iheader-searchform pl-searcher" onsubmit="this.submit();return false;" action="%s/" ><fieldset><span class="btn-search"><i class="icon icon-search"></i></span><input type="text" value="" name="s" class="searchfield" /></fieldset></form>', home_url());
+					
 			?>
 
 	</div>

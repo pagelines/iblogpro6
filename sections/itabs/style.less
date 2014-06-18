@@ -1,8 +1,6 @@
 .section-itabs{
 
-	/* REQUIRED for core functionality */
-
-	.tabs-heading { 
+	.tabs-heading{
 		display: none;
 	}
 
@@ -11,32 +9,7 @@
 		cursor: pointer;
 	}
 
-
-	@media (max-width: 767px) {
-		.list { 
-			display: none!important;
-		}
-		.tabs-heading { 
-			display: block; 
-			cursor: pointer; 
-		}
-		.panel-closed-accordion-only { 
-			display: none;
-		}
-	}
-
-	@media (min-width: 768px) {
-		.panel-closed-accordion-only { 
-			display: block !important;
-		}
-	}
-
-	/* END - Required for core functionality */
-
-
-	/* OPTIONAL - iTabs Skin */
-
-	.responsive-tabs{
+	.tabs{
 		text-align: center;
 	}
 
@@ -51,6 +24,7 @@
 		padding: 8px 50px; 
 		background: #fff; 
 		border: 1px solid #cfcfcf;
+		border-right: none;
 
 			&:first-child{
 				.border-radius(4px 0 0 4px);
@@ -58,6 +32,7 @@
 
 			&:last-child{
 				.border-radius(0 4px 4px 0);
+				border-right: 1px solid #cfcfcf;
 			}
 
 			&:hover{
@@ -71,17 +46,27 @@
 			color: @white;
 			border: 1px solid #2284d1;
 		}
-
 	}
 
-
 	.tabs-panel { 
-		margin-bottom: 30px;
 		text-align: left;
 	}
 
+	.panel-closed-accordion-only { 
+		display: block !important;
+	}
+
 	@media (max-width: 767px) {
+		.panel-closed-accordion-only { 
+			display: none;
+		}
+
+		.list { 
+			display: none!important;
+		}
 		.tabs-heading { 
+			display: block; 
+			cursor: pointer; 
 			font-size: 20px;
 			padding: 8px; 
 			position: relative;
@@ -106,7 +91,5 @@
 			border-top:0;
 		 }
 	}
-
-/* END - Optional - iTabs Skin */
 
 }

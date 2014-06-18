@@ -65,12 +65,7 @@ class iBlog extends PageLinesSection {
 			<div class="span10 offset1">
 				
 				<article id="post-<?php the_ID(); ?>" <?php post_class( $classes ); ?>>
-					<?php  if( is_single() ): ?>
-						<div class="ipost-nav fix">
-							<span class="previous"><?php previous_post_link('%link', '<i class="icon icon-angle-left"></i> %title') ?></span>
-							<span class="next"><?php next_post_link('%link', '%title <i class="icon icon-angle-right"></i>') ?></span>
-						</div>
-					<?php endif; ?>
+					
 					<?php
 						$media = pagelines_media( array( 'thumb-size' => 'aspect-thumb' ) ); 
 						
