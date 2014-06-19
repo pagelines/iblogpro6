@@ -178,23 +178,21 @@ class iHeader extends PageLinesSection {
 		<div class="span6 offset2">
 
 			<?php if( '1' !== $hide_social ): ?>
-				
-				<div class="icons-container">
-					<div class="icons">
 
-						<?php 
-						
-						foreach($social_icons as $icon){
-						
-							$url = ( pl_setting('iheader_'.$icon) ) ? pl_setting('iheader_'.$icon) : false;
-						
-							if( $url )
-								printf('<a href="%s" class="iheader-link" target="_blank"><i class="icon icon-%s"></i></a>', $url, $icon); 
-						}
+				<div class="icons">
+
+					<?php 
 					
-						?>
+					foreach($social_icons as $icon){
+					
+						$url = ( pl_setting('iheader_'.$icon) ) ? pl_setting('iheader_'.$icon) : false;
+					
+						if( $url )
+							printf('<a href="%s" class="iheader-link" target="_blank"><i class="icon icon-%s"></i></a>', $url, $icon); 
+					}
+				
+					?>
 
-					</div>
 				</div>
 
 			<?php endif; ?>
