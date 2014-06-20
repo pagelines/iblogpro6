@@ -24,7 +24,7 @@ class iSubheader extends PageLinesSection {
 				'col'			=> 2,
 				'opts'			=> array(
 					array(
-						'key'		=> 'is_header',
+						'key'		=> 'ish_header',
 						'type' 		=> 'text',
 						'label' 	=> __( 'iSubheader', 'pagelines' ),
 						'help'		=> 'Defaults to current page title if left blank'
@@ -94,7 +94,7 @@ class iSubheader extends PageLinesSection {
 		?>
 		<div class="pl-animation pla-fade row">
 				<div class="span4">
-					<h2 class="ish-header" data-sync="isubheader"><?php echo $title; ?></h2>
+					<h2 class="ish-header" data-sync="ish_header"><?php echo $title; ?></h2>
 				</div>
 				<div class="span8">
 					
