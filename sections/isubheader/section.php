@@ -6,7 +6,6 @@
 	Description: A dynamic subheader area that includes optional sub navigation and call to action.
 	Class Name: iSubheader
 	Filter: component, nav
-	Loading: active
 */
 
 class iSubheader extends PageLinesSection {
