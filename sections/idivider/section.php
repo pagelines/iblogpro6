@@ -5,7 +5,7 @@
 	Author URI: http://www.pagelines.com
 	Description: A simple content width page divider.
 	Class Name: iDivider
-	Filter: miscellaneous
+	Filter: dual-width, miscellaneous
 */
 
 
