@@ -192,7 +192,7 @@ class iFooter extends PageLinesSection {
 
 		<div class="ifooter-bottom">
 			<p>
-				<?php echo $copy . $tagline; ?>
+				<?php echo $copy . ' ' . $tagline; ?>
 			</p>
 		</div><!-- end .ifooter-bottom -->
 
