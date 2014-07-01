@@ -61,12 +61,12 @@ class iSlider extends PageLinesSection
                 ),
                 array(
                     'key'       => 'link',
-                    'label'     => __( 'Primary Link (Optional)', 'pagelines' ),
+                    'label'     => __( 'Link (Optional)', 'pagelines' ),
                     'type'      => 'text'
                 ),
                 array(
                     'key'       => 'link_text',
-                    'label'     => __( 'Primary Text', 'pagelines' ),
+                    'label'     => __( 'Link Text', 'pagelines' ),
                     'type'      => 'text'
                 ),
             )
@@ -89,8 +89,8 @@ class iSlider extends PageLinesSection
                 $the_img = pl_array_get( 'image', $slide );
 
                 if( $the_img ){
-
-                    $title = pl_array_get( 'title', $slide); 
+ 
+                    $title = pl_array_get( 'title', $slide);
 
                     $text = pl_array_get( 'text', $slide); 
 
@@ -106,17 +106,17 @@ class iSlider extends PageLinesSection
 
                     $img = sprintf('<img src="%s" alt="">', $the_img);           
 
-                    $title = sprintf('<h2 data-sync="islider_array_slide%s_title">%s</h2>', $count, $title);
+                    $title = sprintf('<h2 data-sync="islider_array_item%s_title">%s</h2>', $count, $title);
 
-                    $text = sprintf('<p data-sync="islider_array_slide%s_text">%s</p>', $count, $text);
+                    $text = sprintf('<p data-sync="islider_array_item%s_text">%s</p>', $count, $text);
 
                     if( $link ){
-                        $link_text = sprintf('<a data-sync="islider_array_slide%s_link_text" href="%s">%s <i class="icon icon-chevron-right"></i></a>', $count, $link, $link_text);
+                        $link_text = sprintf('<a data-sync="islider_array_item%s_link_text" href="%s">%s <i class="icon icon-chevron-right"></i></a>', $count, $link, $link_text);
                     } else { 
                         $link_text = '';
                     };
 
-                    $content = sprintf('<div data-sync="islider_array_slide%s" class="content %s"> %s %s %s </div>', $count, $element_color, $title, $text, $link_text);
+                    $content = sprintf('<div data-sync="islider_array_item%s" class="content %s"> %s %s %s </div>', $count, $element_color, $title, $text, $link_text);
 
                     $output .= sprintf(
                         '<li>%s %s</li>',

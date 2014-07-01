@@ -186,4 +186,7 @@ function pl_breadcrumbs() {
 	}
 } // end pl_breadcrumbs()
 
+//Remove WooCommerce Title & Breadcrumbs
+remove_action( 'woocommerce_before_main_content','woocommerce_breadcrumb', 20, 0);
+
 
