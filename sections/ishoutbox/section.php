@@ -1,14 +1,14 @@
 <?php
 /*
-	Section: ShoutBox
+	Section: iShoutBox
 	Author: PageLines
 	Author URI: http://www.pagelines.com
 	Description: A simple shout box.
-	Class Name: PLShoutBox
+	Class Name: iShoutBox
 	Filter: component
 */
 
-class PLShoutBox extends PageLinesSection {
+class iShoutBox extends PageLinesSection {
 
 	function section_opts(){
 		$opts = array(

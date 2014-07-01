@@ -5,37 +5,18 @@
 define( 'DMS_CORE', true );
 require_once( 'dms/functions.php' );
 
+/* iBlog Post Excerpt */
 
-
-/* Add Google Font to option panel */
-
-add_filter ( 'pagelines_foundry', 'iblog_google_fonts' );
-
-function iblog_google_fonts($fonts){
-    $fonts['iBlog-PT'] = array(
-	'name' => 'PT Sans',
-	'family' => 'PT Sans, sans-serif',
-	'web_safe' => false,
-	'google' => false,
-	'monospace' => false,
-	'free' => true
-	);
-	
-    return $fonts;
-}
-
-/*  */
-
-function pl_excerpt_more($more) {
-   global $post;
-   return '<a class="read-more fix" href="'. get_permalink($post->ID) . '">' . 'Continue Reading <i class="icon icon-chevron-right ibtn small"></i>' . '</a>';
+function iblog_excerpt_more($more) {
+  	 global $post;
+   	 return '<a class="read-more fix" href="'. get_permalink($post->ID) . '">' . 'Continue Reading <i class="icon icon-chevron-right ibtn small"></i>' . '</a>';
    }
-   add_filter('excerpt_more', 'pl_excerpt_more');
+   add_filter('excerpt_more', 'iblog_excerpt_more');
 
 
-/* Footer Breadcrumbs */
+/* iFooter Breadcrumbs */
 
-function pl_breadcrumbs() {
+function iblog_breadcrumbs() {
 
 	/* === OPTIONS === */
 	$text['home']     = 'Home'; // text for the 'Home' link
@@ -184,7 +165,7 @@ function pl_breadcrumbs() {
 		echo '</div><!-- .breadcrumbs -->';
 
 	}
-} // end pl_breadcrumbs()
+} // end iblog_breadcrumbs()
 
 //Remove WooCommerce Title & Breadcrumbs
 
