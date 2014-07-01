@@ -3,7 +3,7 @@
 	Section: iShoutBox
 	Author: PageLines
 	Author URI: http://www.pagelines.com
-	Description: A simple shout box.
+	Description: A simple dismissable alert box.
 	Class Name: iShoutBox
 	Filter: component
 */
@@ -15,18 +15,18 @@ class iShoutBox extends PageLinesSection {
 			array(
 				'col'		=> 2,
 				'type' 		=> 'textarea',
-				'key'		=> 'shoutbox_content',
-				'label'		=> __( 'ShoutBox Content', 'pagelines' ),
+				'key'		=> 'ishoutbox_content',
+				'label'		=> __( 'iShoutBox Content', 'pagelines' ),
 				'help' 		=> __( 'This area supports text and HTML', 'pagelines' ),
 			),
 			array(
 				'type'		=> 'multi',
-				'key'		=> 'shoutbox_settings', 
-				'label' 	=> __( 'ShoutBox Settings', 'pagelines' ),
+				'key'		=> 'ishoutbox_settings', 
+				'label' 	=> __( 'iShoutBox Settings', 'pagelines' ),
 				'opts'		=> array(
 					array(
 						'type' 			=> 'select',
-						'key'			=> 'shoutbox_align',
+						'key'			=> 'ishoutbox_align',
 						'label' 		=> 'Alignment',
 						'opts'			=> array(
 							'textcenter'	=> array('name' => 'Center (Default)'),
@@ -36,7 +36,7 @@ class iShoutBox extends PageLinesSection {
 						)
 					),	
 				array(
-						'key'		=> 'shoutbox_pad',
+						'key'		=> 'ishoutbox_pad',
 						'type' 		=> 'text',
 						'label' 	=> __( 'Padding <small>(CSS Shorthand)</small>', 'pagelines' ),
 						'ref'		=> __( 'This option uses CSS padding shorthand. For example, use "15px 30px" for 15px padding top/bottom, and 30 left/right.', 'pagelines' ),
@@ -54,16 +54,16 @@ class iShoutBox extends PageLinesSection {
 
 	function section_template() {
 
-		$content = $this->opt('shoutbox_content');
+		$content = $this->opt('ishoutbox_content');
 		
-		$content = (!$content) ? '<p><strong>ShoutBox</strong> &raquo; Add Content or any HTML!</p>' : sprintf('%s', do_shortcode( wpautop($content) ) ); 
+		$content = (!$content) ? '<p><strong>iShoutBox</strong> &raquo; Add Content or any HTML!</p>' : sprintf('%s', do_shortcode( wpautop($content) ) ); 
 			
-		$align = ($this->opt('shoutbox_align', $this->oset)) ? $this->opt('shoutbox_align', $this->oset) : 'center';
+		$align = ($this->opt('ishoutbox_align', $this->oset)) ? $this->opt('ishoutbox_align', $this->oset) : 'center';
 		
-		$padding = ($this->opt('shoutbox_pad')) ? sprintf('padding: %s;', $this->opt('shoutbox_pad')) : ''; 
+		$padding = ($this->opt('ishoutbox_pad')) ? sprintf('padding: %s;', $this->opt('ishoutbox_pad')) : ''; 
 		
 		
-		printf('<div class="shoutbox-wrap fade in %s" style="%s">%s <button type="button" class="close-shoutbox" href="#" data-dismiss="alert">×</button></div>', $align, $padding, $content);
+		printf('<div class="ishoutbox-wrap fade in %s" style="%s">%s <button type="button" class="close-ishoutbox" href="#" data-dismiss="alert">×</button></div>', $align, $padding, $content);
 		
 	}
 }
