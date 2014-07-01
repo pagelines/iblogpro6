@@ -187,6 +187,16 @@ function pl_breadcrumbs() {
 } // end pl_breadcrumbs()
 
 //Remove WooCommerce Title & Breadcrumbs
+
+add_filter( 'woocommerce_page_title', 'woo_shop_page_title');
+
+function woo_shop_page_title( $page_title ) {
+
+	if( 'Shop' == $page_title) {
+		return false;
+	}
+}
+
 remove_action( 'woocommerce_before_main_content','woocommerce_breadcrumb', 20, 0);
 
 
