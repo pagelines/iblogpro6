@@ -97,8 +97,8 @@ class iHeader extends PageLinesSection {
 					array(
 						'key'	=> 'iheader_nav_help',
 						'type'	=> 'help_important',
-						'label'	=> __( 'Using Megamenus (multi column drop down)', 'pagelines' ),
-						'help'	=> __( 'Want a full width, multi column "mega menu"? Simply add a class of "megamenu" to the list items using the WP menu creation tool.', 'pagelines' )
+						'label'	=> __( 'Using styled submenus (multi column drop downs)', 'pagelines' ),
+						'help'	=> __( 'Want full width, multi column "mega menu" or "Panel Menu"? Simply add a class of "megamenu" or "panelmenu" to the list items using the WP menu creation tool.', 'pagelines' )
 					),
 					array(
 						'key'	=> 'iheader_menu',
