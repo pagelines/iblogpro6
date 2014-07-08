@@ -142,7 +142,7 @@ class iFooter extends PageLinesSection {
 				<div class="row">
 					<div class="breadcrumbs-container fix">
 						<a href="<?php echo home_url();?>" class="breadcrumbs-icon"><i class="icon icon-<?php echo $breadcrumbs_icon; ?>"></i></a>
-						<?php if (function_exists('pl_breadcrumbs')) pl_breadcrumbs(); ?>
+						<?php if (function_exists('iblog_breadcrumbs')) iblog_breadcrumbs(); ?>
 					</div>
 				</div>
 
