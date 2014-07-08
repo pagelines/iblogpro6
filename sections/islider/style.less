@@ -84,7 +84,7 @@
 		
 		h2{
 			font-size: @h2Size + 22;
-			letter-spacing: -4px;
+			letter-spacing: -3px;
 			margin: 0;
 			padding: 0;
 		}
@@ -147,6 +147,22 @@
 		}
 	}
 	
+
+	/* Dark Nav*/
+	.flex-direction-nav.dark-nav a{
+		&.flex-prev  { 
+			background: url(@{plChildRoot}/sections/islider/images/prev_dark_2x.png) no-repeat 0 0;
+			background-size: 68px 131px;
+			left: -50px; 
+		}
+		&.flex-next  { 
+			background: url(@{plChildRoot}/sections/islider/images/next_dark_2x.png) no-repeat 0 0;
+			background-size: 68px 131px;
+			right: -50px; 
+		}
+	}
+
+
 	.islider:hover{
 		.flex-direction-nav a {
 			opacity: 0.4;
