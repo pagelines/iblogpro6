@@ -88,7 +88,9 @@ class iSubheader extends PageLinesSection {
 
 		if( $link ){
 			$callout = sprintf('<a data-sync="ish_link_text" href="%s" class="ish-callout btn-link-color">%s</a>', $link, $link_text);
-		} 
+		} else{
+			$callout = '';
+		}
 
 		?>
 		<div class="pl-animation pla-fade row">

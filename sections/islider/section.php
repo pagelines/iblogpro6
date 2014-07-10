@@ -51,7 +51,7 @@ class iSlider extends PageLinesSection
                 ),
                 array(
                     'key'       => 'element_color',
-                    'label'     => __( 'Text', 'pagelines' ),
+                    'label'     => __( 'Style', 'pagelines' ),
                     'type'      => 'select',
                     'default'   => 'element-light',
                     'opts'      => array(
