@@ -151,7 +151,7 @@ class PageLinesInstallTheme extends PageLinesInstall{
 			array(
 				'object'	=> 'PLSectionArea',
 				'settings'	=> array(
-					'pl_area_pad' 		=> '0',
+					'pl_area_pad' 		=> '0px',
 				),
 				
 				
@@ -220,6 +220,9 @@ class PageLinesInstallTheme extends PageLinesInstall{
 		$template['map'] = array(
 			array(
 				'object'	=> 'PLSectionArea',
+				'settings'	=> array(
+					'pl_area_pad' 		=> '0px',
+				),
 
 				'content'	=> array(
 					array(
@@ -251,6 +254,9 @@ class PageLinesInstallTheme extends PageLinesInstall{
 		$template['map'] = array(
 			array(
 				'object'	=> 'PLSectionArea',
+				'settings'	=> array(
+					'pl_area_pad' 		=> '0px',
+				),
 
 				'content'	=> array(
 					array(
@@ -285,6 +291,9 @@ class PageLinesInstallTheme extends PageLinesInstall{
 		$template['map'] = array(
 			array(
 				'object'	=> 'PLSectionArea',
+				'settings'	=> array(
+					'pl_area_pad' 		=> '0px',
+				),
 
 				'content'	=> array(
 					array(

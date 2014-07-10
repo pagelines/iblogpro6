@@ -116,6 +116,7 @@
 			display: inline-block;
 			color: #fff;
 			margin: 2px -20px 0 0;
+			.transition(none);
 		}
 
 		.searchfield{
@@ -135,6 +136,9 @@
 		}
 
 		&.has-focus{
+			.btn-search{
+				opacity: 0;
+			}
 			.searchfield{
 				width: 160px;
 			    opacity: 1;
