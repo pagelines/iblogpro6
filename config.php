@@ -127,7 +127,7 @@ class PageLinesInstallTheme extends PageLinesInstall{
 	function page_templates(){
 		
 		$templates = array(
-			'welcome' 		=> $this->template_welcome(), // default on install
+			'ibp-welcome' 		=> $this->template_welcome(), // default on install
 			'ibp-blog' 		=> $this->template_blog(),
 			'ibp-post' 		=> $this->template_post(),
 			'ibp-archive'	=> $this->template_archive()
@@ -140,7 +140,7 @@ class PageLinesInstallTheme extends PageLinesInstall{
 	// Template Map
 	function template_welcome(){
 		
-		$template['key'] = 'welcome';
+		$template['key'] = 'ibp-welcome';
 		
 		$template['name'] = 'iBlogPro | Welcome';
 		
@@ -308,6 +308,48 @@ class PageLinesInstallTheme extends PageLinesInstall{
 		); 
 		
 		return $template;
+	}
+	
+	
+	function page_on_activation( $templateID = 'welcome' ){
+		
+		global $user_ID;
+		
+		$data = $this->activation_page_data();
+		
+		$page = array(
+			'post_type'		=> 'page',
+			'post_status'	=> 'draft',
+			'post_author'	=> $user_ID,
+			'post_title'	=> __( 'PageLines IblogPro Getting Started', 'pagelines' ),
+			'post_content'	=> $this->getting_started_content(),
+			'post_name'		=> 'pl-getting-started',
+			'template'		=> 'ibp-welcome',
+		);
+		
+		$post_data = wp_parse_args( $data, $page );
+		
+		// Check or add page (leave in draft mode)
+		$pages = get_pages( array( 'post_status' => 'draft' ) );
+		$page_exists = false;
+		foreach ($pages as $page) { 
+			
+			$name = $page->post_name;
+			
+			if ( $name == $post_data['post_name'] ) { 
+				$page_exists = true;
+				$id = $page->ID;
+			}
+			 
+		}
+		
+		if( ! $page_exists )
+			$id = wp_insert_post(  $post_data );
+			
+		
+		pl_set_page_template( $id, $post_data['template'], 'both' );
+		
+		return $id;
 	}
 
 }
