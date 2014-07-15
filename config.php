@@ -144,7 +144,7 @@ class PageLinesInstallTheme extends PageLinesInstall{
 		
 		$template['name'] = 'iBlogPro | Welcome';
 		
-		$template['desc'] = 'Getting started guide &amp; template testing!!!!.';
+		$template['desc'] = 'Getting started guide &amp; template.';
 		
 		$template['map'] = array(
 			
