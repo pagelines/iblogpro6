@@ -89,6 +89,16 @@ class iHeader extends PageLinesSection {
 				'title'	=> 'Navigation',
 				'col'	=> 2,
 				'opts'	=> array(
+					 array(
+	                    'key'       => 'iheader_nav_style',
+	                    'label'     => __( 'Nav Style', 'pagelines' ),
+	                    'type'      => 'select',
+	                    'default'   => 'classic',
+	                    'opts'      => array(
+	                        'classic'  => array('name'=> 'Classic - Glossy'),
+	                        'modern'   => array('name'=> 'Modern - Flat'),
+	                    )
+	                ),
 					array(
 						'key'	=> 'icon',
 						'label'	=> __( 'Home Icon', 'pagelines' ),
@@ -148,6 +158,8 @@ class iHeader extends PageLinesSection {
 
    		$hide_social = ( $this->opt('iheader_social_disable') ) ? $this->opt('iheader_social_disable') : false;
 
+   		$nav_style =  ( $this->opt('iheader_nav_style') ) ? $this->opt('iheader_nav_style') : 'classic';
+
    		$home_icon = ( $this->opt('icon') ) ? $this->opt('icon') : 'pagelines';
 
 		$menu = ( $this->opt('iheader_menu') ) ? $this->opt('iheader_menu') : false;
@@ -158,7 +170,6 @@ class iHeader extends PageLinesSection {
 			'theme_location' => 'iheader_nav',
 			'menu' => $menu,
 			'menu_class'	=> 'inline-list pl-nav sf-menu',
-			
 		);
 
 	?>
@@ -200,7 +211,7 @@ class iHeader extends PageLinesSection {
 		</div>
 	</div>
 
-	<div class="nav-wrap fix">
+	<div class="nav-wrap fix <?php echo $nav_style; ?>">
 
 			<ul class="homebutton">
 				<li>
@@ -217,7 +228,7 @@ class iHeader extends PageLinesSection {
 				echo pl_navigation( $menu_args );
 
 				if( ! $hide_search )
-					printf('<form method="get" class="iheader-searchform pl-searcher" onsubmit="this.submit();return false;" action="%s/" ><fieldset><span class="btn-search"><i class="icon icon-search"></i></span><input type="text" value="" name="s" class="searchfield" /></fieldset></form>', home_url());
+					printf('<form method="get" class="iheader-searchform pl-searcher %s" onsubmit="this.submit();return false;" action="%s/" ><fieldset><span class="btn-search"><i class="icon icon-search"></i></span><input type="text" value="" name="s" class="searchfield" /></fieldset></form>', $nav_style, home_url());
 					
 			?>
 
