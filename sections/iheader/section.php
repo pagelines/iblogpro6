@@ -12,6 +12,7 @@
 class iHeader extends PageLinesSection {
 
 	function section_persistent(){
+		
 		register_nav_menus( array( 'iheader_nav' => __( 'iHeader Section', 'pagelines' ) ) );
 
 	}
@@ -141,6 +142,11 @@ class iHeader extends PageLinesSection {
 			'dribbble',
 			'flickr',
 			'github',
+			'yelp',
+			'tumblr',
+			'vine',
+			'yahoo',
+			'wordpress',
 		); 
 		
 		return $social_icons;
