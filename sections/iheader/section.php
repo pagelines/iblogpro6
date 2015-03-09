@@ -12,7 +12,7 @@
 class iHeader extends PageLinesSection {
 
 	function section_persistent(){
-		
+
 		register_nav_menus( array( 'iheader_nav' => __( 'iHeader Section', 'pagelines' ) ) );
 
 	}
@@ -20,17 +20,17 @@ class iHeader extends PageLinesSection {
 	function section_opts(){
 
 
-		$social_urls = array(); 
-	
+		$social_urls = array();
+
 		$social_icons = $this->social_icons();
-		
+
 		foreach($social_icons as $icon){
 			$social_urls[] = array(
-				'label'	=> ui_key($icon) . ' URL', 
+				'label'	=> ui_key($icon) . ' URL',
 				'key'	=> 'iheader_'.$icon,
 				'type'	=> 'text',
 				'scope'	=> 'global',
-			); 
+			);
 		}
 
 
@@ -69,7 +69,7 @@ class iHeader extends PageLinesSection {
 				'opts'	=> array(
 					array(
 						'type'	=> 'multi',
-						'key'	=> 'iheader_social_urls', 
+						'key'	=> 'iheader_social_urls',
 						'title'	=> 'Link URLs',
 						'opts'	=> $social_urls,
 					),
@@ -120,7 +120,7 @@ class iHeader extends PageLinesSection {
 						'key'	=> 'iheader_search',
 						'type'	=> 'check',
 						'label'	=> __( 'Hide Search?', 'pagelines' ),
-					),	
+					),
 				)
 			)
 		);
@@ -130,7 +130,7 @@ class iHeader extends PageLinesSection {
 	}
 
 	function social_icons( ){
-		
+
 		$social_icons = array(
 			'facebook',
 			'linkedin',
@@ -147,20 +147,20 @@ class iHeader extends PageLinesSection {
 			'vine',
 			'yahoo',
 			'wordpress',
-		); 
-		
+		);
+
 		return $social_icons;
-		
+
 	}
 
-	
+
    function section_template( $location = false ) {
 
    		$logo = $this->image( 'iheader_logo', pl_get_theme_logo(), array(), get_bloginfo('name'));
 
    		$hide_logo = ( $this->opt('iheader_logo_disable') ) ? $this->opt('iheader_logo_disable') : false;
 
-   		$social_icons = $this->social_icons(); 
+   		$social_icons = $this->social_icons();
 
    		$hide_social = ( $this->opt('iheader_social_disable') ) ? $this->opt('iheader_social_disable') : false;
 
@@ -176,6 +176,7 @@ class iHeader extends PageLinesSection {
 			'theme_location' => 'iheader_nav',
 			'menu' => $menu,
 			'menu_class'	=> 'inline-list pl-nav sf-menu',
+			'depth'				=> 3
 		);
 
 	?>
@@ -187,7 +188,7 @@ class iHeader extends PageLinesSection {
 			<?php if( '1' !== $hide_logo ): ?>
 
 				<a href="<?php echo home_url('/');?>"><?php echo $logo; ?></a>
-			
+
 			<?php endif; ?>
 
 		</div>
@@ -198,16 +199,16 @@ class iHeader extends PageLinesSection {
 
 				<div class="icons">
 
-					<?php 
-					
+					<?php
+
 					foreach($social_icons as $icon){
-					
+
 						$url = ( pl_setting('iheader_'.$icon) ) ? pl_setting('iheader_'.$icon) : false;
-					
+
 						if( $url )
-							printf('<a href="%s" class="iheader-link" target="_blank"><i class="icon icon-%s"></i></a>', $url, $icon); 
+							printf('<a href="%s" class="iheader-link" target="_blank"><i class="icon icon-%s"></i></a>', $url, $icon);
 					}
-				
+
 					?>
 
 				</div>
@@ -222,9 +223,9 @@ class iHeader extends PageLinesSection {
 			<ul class="homebutton">
 				<li>
 					<a href="<?php echo home_url(); ?>" title="<?php bloginfo("name"); ?>">
-						
+
 						<i class="icon icon-<?php echo $home_icon; ?>"></i>
-					
+
 					</a>
 				</li>
 			</ul>
@@ -235,7 +236,7 @@ class iHeader extends PageLinesSection {
 
 				if( ! $hide_search )
 					printf('<form method="get" class="iheader-searchform pl-searcher %s" onsubmit="this.submit();return false;" action="%s/" ><fieldset><span class="btn-search"><i class="icon icon-search"></i></span><input type="text" value="" name="s" class="searchfield" /></fieldset></form>', $nav_style, home_url());
-					
+
 			?>
 
 	</div>
