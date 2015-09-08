@@ -77,7 +77,13 @@ class iBlog extends PageLinesSection {
 					<?php if( ! $linkbox || is_single() ): ?>
 					<div class="ipost-text">
 						<?php if( ! $linkbox  ): ?>
-							<h1 class="title"><a href="<?php the_permalink(); ?>"><?php echo get_the_title(); ?></a></h1>
+
+								<?php if( is_single() ) : ?>
+									<h1 class="title"><?php echo get_the_title(); ?></h1>
+								<?php else : ?>
+									<h1 class="title"><a href="<?php the_permalink(); ?>"><?php echo get_the_title(); ?></a></h1>
+								<?php endif; ?>
+
 						<?php endif; ?>
 							<div class="content">
 								<div class="author-name">Posted by <?php echo do_shortcode( '[post_author_posts_link]' ); ?> / <?php echo do_shortcode( '[post_categories]' ); ?></div>
