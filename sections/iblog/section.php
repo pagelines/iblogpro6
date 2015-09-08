@@ -23,11 +23,17 @@ class iBlog extends PageLinesSection {
 
 	function section_opts(){
 
-		$options = array();
+		$opts = array(
+			array(
+				'type'	=> 'check',
+				'key'	=> 'iblog_date',
+				'title'	=> __( 'Show Date?', 'pagelines' ),
+				'col'	=> 1,
+				'default'	=> false
 
+			) );
 
-
-		return $options;
+		return $opts;
 
 	}
 
@@ -61,6 +67,9 @@ class iBlog extends PageLinesSection {
 			<div class="span1 ipost-date">
 					<span class="day"><?php echo do_shortcode( '[post_date format="d"]' ); ?></span>
 					<span class="month"><?php echo do_shortcode( '[post_date format="M"]' ); ?></span>
+					<?php if( $this->opt( 'iblog_date', array( 'default' => false ) ) ) : ?>
+						<span class="year"><?php echo do_shortcode( '[post_date format="Y"]' ); ?></span>
+					<?php endif; ?>
 			</div>
 			<div class="span10 offset1">
 
