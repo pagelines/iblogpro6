@@ -1,7 +1,5 @@
 # iblogpro6
 
-# dms2
-
 To get a working copy follow the following instuctions.
 
 *PLEASE NOTE*
