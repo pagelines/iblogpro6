@@ -6,7 +6,7 @@ To get a working copy follow the following instuctions.
 Downloading the zip from github will *NOT* work as this repo uses submodules, you have to do the following..
 
 * git clone https://github.com/pagelines/iblogpro6.git
-* cd dms-theme
+* cd iblogpro6
 * git submodule update --init --recursive
 
 You will now have a working copy in iblogpro6 folder.
